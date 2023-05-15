@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">SoilIt!</string>
+    <string name="Splashname">SoilIt!</string>
+    <string name="login_text">Welcome Back !</string>
+    <string name="login_text_2">Sign in to Continue</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="forget_password">Forget Password ?</string>
+    <string name="login">Login</string>
+    <string name="newuser">New User ? Sign Up</string>
+    <string name="register_text">Halooo !</string>
+    <string name="Signup_text_2">SignUp and start start Exploring</string>
+    <string name="email_hint">Email</string>
+    <string name="SignUp">SignUp</string>
+    <string name="olduser">Have Account ? SignIn Now</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home_fragment">Home Fragment Here</string>
+    <string name="search_home">Search</string>
+    <string name="News">News</string>
+    <string name="galery">Gallery</string>
+    <string name="upload">Upload</string>
+    <string name="description">Masukkan deskripsi</string>
+    <string name="network_unavailable">Jaringan tidak tersedia !</string>
+    <string name="nama">Nama</string>
+    <string name="image_description">Description</string>
+    <string name="alert_invalid_email">Email tidak valid !</string>
+    <string name="alert_password_less_than_6">Karakter kurang dari 8</string>
+    <string name="profil_blank_fragment">Profil Fragment</string>
+    <string name="FunFact">SoilIt!</string>
+    <string name="SoilDetection">Soil Detection</string>
+    <string name="Tips">Tips</string>
+    <string name="Ask">Ask</string>
+    <string name="Name_User">Aisy Al Fawwaz</string>
+    <string name="Update">Update</string>
+    <string name="phone_hint">Phone Number</string>
+    <string name="top_headlines">Top Tips</string>
+    <string name="search">Search</string>
+    <string name="Time">Time</string>
+    <string name="Light">Light</string>
+    <string name="Lumen">Lumen</string>
+</resources>
