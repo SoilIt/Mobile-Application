@@ -1,7 +1,6 @@
 package com.github.user.soilit.api.sensorapi
 
-import com.github.user.soilit.api.User
-import com.github.user.soilit.api.User_sensor
+import com.github.user.soilit.api.model.User_sensor
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

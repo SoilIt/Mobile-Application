@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.github.user.soilit.api.User
+import com.github.user.soilit.api.model.User
 import com.github.user.soilit.databinding.ItemUserBinding
 
 class UserAdapter : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-
     private val list = ArrayList<User>()
-
 
     fun setList(users: ArrayList<User>) {
         list.clear()

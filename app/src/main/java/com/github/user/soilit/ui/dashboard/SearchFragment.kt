@@ -80,6 +80,5 @@ class SearchFragment : Fragment() {
         }
     }
 
-    companion object {
-    }
+    companion object
 }
