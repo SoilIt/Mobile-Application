@@ -1,4 +1,4 @@
-package com.github.user.soilit.api
+package com.github.user.soilit.api.model
 
 data class User(
     val author: String,

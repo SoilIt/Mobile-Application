@@ -30,7 +30,8 @@ class SplashActivity : AppCompatActivity() {
         val bottomAnim = AnimationUtils.loadAnimation(this, R.anim.bottom_animation)
 
         binding.imageView.startAnimation(topAnim)
-        binding.textView.startAnimation(bottomAnim)
+        binding.logoText.startAnimation(bottomAnim)
+        binding.descriptionText.startAnimation(bottomAnim)
 
         Handler(Looper.getMainLooper()).postDelayed({
             val intent = Intent(this, LoginActivity::class.java)

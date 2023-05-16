@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.user.soilit.R
-import com.github.user.soilit.api.User_sensor
+import com.github.user.soilit.api.model.User_sensor
 import com.github.user.soilit.api.sensorapi.awsGetApi
-import com.github.user.soilit.ui.dashboard.Adapter.SensorAdapter.SensorAdapter
 import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -24,6 +23,7 @@ class SettingsFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https:khogyrvwcc.execute-api.ap-south-1.amazonaws.com/sensor/")
             .build()
+        
         val AwsGetApi = retro.create(awsGetApi::class.java)
 
         // Get data using Coroutine
@@ -34,7 +34,6 @@ class SettingsFragment : Fragment() {
                 if (response.isSuccessful) {
                     recyclerView.apply {
                         layoutManager = LinearLayoutManager(requireContext())
-                        adapter = SensorAdapter(response.body()!! as MutableList<User_sensor>)
                     }
                 } else {
                     Log.e("ERROR", response.message())
