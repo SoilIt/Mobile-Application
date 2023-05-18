@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="textEditCustom">
+        <item name="android:layout_marginVertical">15dp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:textColorHint">@color/primary</item>
+        <item name="android:textColor">@color/component</item>
+    </style>
+</resources>
