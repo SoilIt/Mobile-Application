@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnAddPhoto.setOnClickListener {
         
         }
+        
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.home -> {

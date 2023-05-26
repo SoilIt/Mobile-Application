@@ -5,11 +5,11 @@ import android.graphics.Canvas
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputEditText
 import com.soilit.app.soilit.R
 
-class CustomEmail: AppCompatEditText {
+class CustomEmail: TextInputEditText {
     constructor(context: Context): super(context){
         init()
     }
@@ -35,9 +35,9 @@ class CustomEmail: AppCompatEditText {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-                error = if (p0.toString().trim().matches(emailPattern.toRegex())) null else context.getString(
-                    R.string.alert_invalid_email)
+//                val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
+//                error = if (p0.toString().trim().matches(emailPattern.toRegex())) null else context.getString(
+//                    R.string.alert_invalid_email)
             }
         })
     }

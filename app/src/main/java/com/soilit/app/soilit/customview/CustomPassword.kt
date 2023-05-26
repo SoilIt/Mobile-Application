@@ -5,12 +5,12 @@ import android.graphics.Canvas
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
+import com.google.android.material.textfield.TextInputEditText
 import com.soilit.app.soilit.R
 
-class CustomPassword: AppCompatEditText {
+class CustomPassword: TextInputEditText {
     private var signInButton: AppCompatButton? = null
 
     constructor(context: Context) : super(context) {
@@ -46,9 +46,9 @@ class CustomPassword: AppCompatEditText {
             }
 
             override fun afterTextChanged(p0: Editable?) {
-                val passwordLength = p0.toString().length
-                error = if (passwordLength in 1..7) context.getString(R.string.alert_password_less_than_6) else null
-                signInButton?.isEnabled = passwordLength >= 8
+//                val passwordLength = p0.toString().length
+//                error = if (passwordLength in 1..7) context.getString(R.string.alert_password_less_than_6) else null
+//                signInButton?.isEnabled = passwordLength >= 8
             }
 
         })

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="textInputLayout">
+        <item name="android:background">@color/white</item>
+        <item name="android:outlineAmbientShadowColor">@color/white</item>
+        <item name="android:textColorHint">@color/primary</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="errorEnabled">true</item>
+        <item name="hintEnabled">false</item>
+    </style>
+</resources>
