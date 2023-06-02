@@ -48,38 +48,34 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_layout"
-                    style="@style/textInputLayout"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    >
+                    android:hint="@string/email_hint">
 
-                    <com.soilit.app.soilit.customview.CustomEmail
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
-                        style="@style/textEditCustom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/email_hint"
-                        android:inputType="textEmailAddress"
-                        android:textSize="16sp" />
+                        android:inputType="textEmailAddress" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/password_layout"
-                    style="@style/textInputLayout"
+                    style="@style/TextInputLayoutStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="@string/password_hint"
                     app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/primary">
+                    app:passwordToggleTint="@color/primary"
+                    >
 
-                    <com.soilit.app.soilit.customview.CustomPassword
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/password"
-                        style="@style/textEditCustom"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/password_hint"
-                        android:inputType="textPassword"
-                        android:textSize="16sp" />
+                        android:inputType="textPassword" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
@@ -155,9 +151,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:backgroundTint="@color/white"
+                    android:clickable="true"
                     android:drawableLeft="@drawable/google_drawable"
                     android:drawablePadding="10dp"
                     android:elevation="0dp"
+                    android:focusable="true"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
                     android:shadowColor="#FFF"
@@ -166,9 +164,7 @@
                     android:textStyle="bold"
                     app:cornerRadius="10dp"
                     app:strokeColor="@color/component"
-                    app:strokeWidth="1dp"
-                    android:clickable="true"
-                    android:focusable="true" />
+                    app:strokeWidth="1dp" />
             </LinearLayout>
 
             <LinearLayout

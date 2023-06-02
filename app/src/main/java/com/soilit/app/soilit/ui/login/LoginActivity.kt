@@ -16,6 +16,8 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.FirebaseFirestore
 import com.soilit.app.soilit.R
 import com.soilit.app.soilit.databinding.ActivityLoginBinding
 import com.soilit.app.soilit.ui.main.MainActivity
@@ -189,6 +191,12 @@ class LoginActivity : AppCompatActivity() {
         
         auth.signInWithCredential(credential).addOnCompleteListener {
             if (it.isSuccessful) {
+                val user = auth.currentUser
+                
+                user?.let { user ->
+                    saveUsernameToFirestore(user.uid, user.displayName ?: "", user.email)
+                }
+                
                 startMainActivity()
             } else {
                 Log.d("TAG", "GOOGLE : NOK ")
@@ -196,6 +204,31 @@ class LoginActivity : AppCompatActivity() {
             }
             
             onLoading(false)
+        }
+    }
+    
+    private fun saveUsernameToFirestore(userId: String?, username: String, email: String?) {
+        val db = FirebaseFirestore.getInstance()
+        
+        userId?.let {
+            val user = hashMapOf(
+                "uid" to userId,
+                "name" to username,
+                "email" to email,
+                "method" to "Google",
+                "createdAt" to FieldValue.serverTimestamp(),
+                "updatedAt" to FieldValue.serverTimestamp()
+            
+            )
+            db.collection("users")
+                .document(userId)
+                .set(user)
+                .addOnSuccessListener {
+                    // Username saved successfully
+                }
+                .addOnFailureListener { e ->
+                    // Handle the error
+                }
         }
     }
     
