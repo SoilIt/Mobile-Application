@@ -1,0 +1,15 @@
+<resources>
+    <style name="RoundedCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/RoundedShapeAppearanceOverlay.MaterialCardView</item>
+    </style>
+
+    <style name="RoundedShapeAppearanceOverlay.MaterialCardView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="CustomCardView" parent="Widget.MaterialComponents.CardView">
+        <item name="strokeWidth">0dp</item>
+    </style>
+
+</resources>

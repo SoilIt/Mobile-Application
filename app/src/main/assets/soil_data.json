@@ -1,0 +1,46 @@
+{
+  "gambut": {
+    "description": "Deskripsi gambut",
+    "plants": ["Tanaman gambut 1", "Tanaman gambut 2"]
+  },
+  "humus": {
+    "description": "Deskripsi humus",
+    "plants": ["Tanaman humus 1", "Tanaman humus 2"]
+  },
+  "aluvial": {
+    "description": "Deskripsi aluvial",
+    "plants": ["Tanaman aluvial 1", "Tanaman aluvial 2"]
+  },
+  "laterit": {
+    "description": "Deskripsi laterit",
+    "plants": ["Tanaman laterit 1", "Tanaman laterit 2"]
+  },
+  "litosol": {
+    "description": "Deskripsi litosol",
+    "plants": ["Tanaman litosol 1", "Tanaman litosol 2"]
+  },
+  "kapur": {
+    "description": "Deskripsi kapur",
+    "plants": ["Tanaman kapur 1", "Tanaman kapur 2"]
+  },
+  "liat": {
+    "description": "Deskripsi liat",
+    "plants": ["Tanaman liat 1", "Tanaman liat 2"]
+  },
+  "organosol": {
+    "description": "Deskripsi organosol",
+    "plants": ["Tanaman organosol 1", "Tanaman organosol 2"]
+  },
+  "pasir": {
+    "description": "Deskripsi pasir",
+    "plants": ["Tanaman pasir 1", "Tanaman pasir 2"]
+  },
+  "regosol": {
+    "description": "Deskripsi regosol",
+    "plants": ["Tanaman regosol 1", "Tanaman regosol 2"]
+  },
+  "vulkanik": {
+    "description": "Deskripsi vulkanik",
+    "plants": ["Tanaman vulkanik 1", "Tanaman vulkanik 2"]
+  }
+}

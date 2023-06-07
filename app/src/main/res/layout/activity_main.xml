@@ -4,18 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
+    tools:context=".MainActivity">
+=======
     >
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
 
     <FrameLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
+<<<<<<< HEAD
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+=======
         android:layout_height="match_parent">
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
     </FrameLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
+<<<<<<< HEAD
+        android:layout_height="55dp"
+=======
         android:layout_height="wrap_content"
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
         android:layout_gravity="bottom"
         app:fabCradleMargin="10dp"
         app:fabCradleRoundedCornerRadius="10dp"
@@ -29,17 +42,30 @@
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
             android:background="@drawable/transparent_background"
+<<<<<<< HEAD
+            app:menu="@menu/bottom_nav" />
+
+=======
             app:menu="@menu/bottom_nav_menu"
             />
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
     </com.google.android.material.bottomappbar.BottomAppBar>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_photo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+        android:src="@drawable/camera"
+        app:layout_anchor="@id/bottomAppBar"
+        tools:ignore="ContentDescription,SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+=======
         android:src="@drawable/ic_camera"
         app:layout_anchor="@id/bottomAppBar"
         tools:ignore="ContentDescription" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
+=======
     <color name="primary">#FFB4C173</color>
     <color name="primaryDark">#FFA3B86C</color>
     <color name="secondary">#FF87592A</color>
@@ -9,14 +11,28 @@
     <color name="warning">#FFB33A3A</color>
     <color name="warningDark">#FF8F2D2D</color>
 
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
+<<<<<<< HEAD
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#FF505B3E</color>
+    <color name="green_primary">#FFB4C173</color>
+    <color name="brown">#FF87592A</color>
+
+    <color name="colorPrimaryDark">#01484e</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#0299ab</color>
+    <color name="defaultBackground">#f1f4f7</color>
+=======
     <color name="black">#030303</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background">#EBE7E7</color>
     <color name="yellow">#fece2f</color>
     <color name="backgroundLayer">#C6000000</color>
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
 </resources>

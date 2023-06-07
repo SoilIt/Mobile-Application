@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="8dp"
+    android:layout_gravity="center"
+    app:cardElevation="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tvresultsoil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/HumusSoil"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivresultsoil"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/tvresultsoil"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/rounded_image_result"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/datehistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ivresultsoil"
+            android:fontFamily="@font/poppins"
+            android:layout_marginTop="16dp"
+            android:text="Date: 14/05/2023" />
+
+        <TextView
+            android:id="@+id/soiltype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/datehistory"
+            android:fontFamily="@font/poppins"
+            android:text="Name: Humus Soil" />
+
+        <TextView
+            android:id="@+id/temperature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/soiltype"
+            android:fontFamily="@font/poppins"
+            android:text="Temperature: 27.1 C" />
+
+        <TextView
+            android:id="@+id/moisture"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/temperature"
+            android:text="Moisture: 51%" />
+
+
+        <TextView
+            android:id="@+id/soilCondition"
+            android:layout_width="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/moisture"
+            android:text="Soil Condition: Good" />
+
+        <TextView
+            android:id="@+id/soilDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/soilCondition"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins"
+            android:text="Soil Detail: " />
+
+        <TextView
+            android:id="@+id/plantRecommendation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/soilDetail"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins"
+            android:text="Plant Recommendation: " />
+
+        <Button
+            android:id="@+id/detectSoilQuality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/savehistory"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins"
+            android:text="Detect Soil Quality" />
+
+        <Button
+            android:id="@+id/savehistory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/poppins"
+            android:text="Save" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

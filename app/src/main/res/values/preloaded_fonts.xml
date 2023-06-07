@@ -1,3 +1,15 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/</item>
+        <item>@font/baloo</item>
+        <item>@font/poppins</item>
+        <item>@font/poppins_bold</item>
+        <item>@font/poppins_thin</item>
+    </array>
+</resources>
+=======
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
@@ -5,3 +17,4 @@
         <item>@font/baloo</item>
     </array>
 </resources>
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763

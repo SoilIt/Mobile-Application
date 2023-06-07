@@ -1,0 +1,31 @@
+import com.github.user.capstonesoilit.api.CampaignApi
+import okhttp3.Cache
+import okhttp3.OkHttpClient
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+
+object RetrofitClient {
+    private const val BASE_URL = "https://private-7a3f77-soilit.apiary-mock.com/"
+    private const val CACHE_SIZE = 10 * 1024 * 1024 // 10 MB
+
+    private val cache = Cache(File("path_to_cache_directory"), CACHE_SIZE.toLong())
+
+    val okHttpClient: OkHttpClient by lazy {
+        OkHttpClient.Builder()
+            .cache(cache)
+            .build()
+    }
+
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    fun apiInstance(): CampaignApi {
+        return retrofit.create(CampaignApi::class.java)
+    }
+}
