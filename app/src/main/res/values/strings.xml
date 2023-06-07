@@ -1,20 +1,27 @@
 <resources>
     <string name="app_name">SoilIt!</string>
     <string name="splash_desc">An application for soil</string>
-    <string name="Splashname">SoilIt!</string>
+
+    <!--    Login Section-->
     <string name="login_text">Welcome Back !</string>
-    <string name="login_text_2">Sign in to Continue</string>
+    <string name="login_desc">Sign in to Continue</string>
+    <string name="email_hint">Email</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
     <string name="forget_password">Forget Password ?</string>
     <string name="login">Login</string>
-    <string name="newuser">New User ? Sign Up</string>
-    <string name="register_text">Halooo !</string>
+    <string name="or_sign_in_with">Or Sign In with</string>
+    <string name="google">Google</string>
+    <string name="to_signup_text">Don\'t have account?</string>
+    <string name="to_signin_text">Already have account?</string>
+    <string name="signup_now">Sign up now!</string>
+    <string name="login_now"> Login now!</string>
+
+    <string name="register_text">Hello !</string>
     <string name="Signup_text_2">SignUp and start start Exploring</string>
-    <string name="email_hint">Email</string>
-    <string name="SignUp">SignUp</string>
-    <string name="olduser">Have Account ? SignIn Now</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="SignUp">Sign Up</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home_fragment">Home Fragment Here</string>
     <string name="search_home">Search</string>
@@ -40,4 +47,25 @@
     <string name="Time">Time</string>
     <string name="Light">Light</string>
     <string name="Lumen">Lumen</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">Change Password</string>
+    <string name="language">Language</string>
+    <string name="settings">Settings</string>
+    <string name="confirm_logout">Are you sure want to logout?</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="back_button">back button</string>
+    <string name="current_password_hint">Current Password</string>
+    <string name="new_password_hint">New Password</string>
+    <string name="user_profile">User Profile</string>
+    <string name="name_hint">Name</string>
+    <string name="edit">Edit</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="Hello">Hello</string>
+    <string name="faq">FAQ</string>
+    <string name="cancel_change_password_desc">Cancel changing password?</string>
+    <string name="no">No</string>
+    <string name="change_password_success">Change password success!</string>
+    <string name="ok">Ok</string>
+    <string name="change_password_error">Change password error!</string>
 </resources>
