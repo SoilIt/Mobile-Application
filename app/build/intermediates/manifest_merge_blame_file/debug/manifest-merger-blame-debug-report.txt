@@ -1,0 +1,232 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.github.user.soilitouraplication"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="22"
+8-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="32" />
+9-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml
+10
+11    <uses-feature android:name="android.hardware.camera" />
+11-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:5:5-60
+11-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:5:19-57
+12
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:7:5-65
+13-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:7:22-62
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:8:5-67
+14-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:8:22-64
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:9:5-79
+15-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:9:22-76
+16
+17    <permission
+17-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+18        android:name="com.github.user.soilitouraplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+18-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+19        android:protectionLevel="signature" />
+19-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+20
+21    <uses-permission android:name="com.github.user.soilitouraplication.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+21-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+21-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+22
+23    <application
+23-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:11:5-74:19
+24        android:allowBackup="true"
+24-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:12:9-35
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.9.0] D:\StoryApp-master\caches\transforms-3\9baae2a0a064870b9506522ab355f7bf\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+26        android:dataExtractionRules="@xml/data_extraction_rules"
+26-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:13:9-65
+27        android:debuggable="true"
+28        android:fullBackupContent="@xml/backup_rules"
+28-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:14:9-54
+29        android:icon="@mipmap/ic_launcher"
+29-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:15:9-43
+30        android:label="@string/app_name"
+30-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:16:9-41
+31        android:roundIcon="@mipmap/ic_launcher_round"
+31-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:17:9-54
+32        android:supportsRtl="true"
+32-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:18:9-35
+33        android:testOnly="true"
+34        android:theme="@style/Theme.SoilitOurAplication" >
+34-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:19:9-57
+35        <activity
+35-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:21:9-33:20
+36            android:name="com.github.user.soilitouraplication.MainActivity"
+36-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:22:13-41
+37            android:exported="true" >
+37-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:23:13-36
+38            <intent-filter>
+38-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:24:13-28:29
+39                <action android:name="android.intent.action.MAIN" />
+39-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:25:17-69
+39-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:25:25-66
+40
+41                <category android:name="android.intent.category.LAUNCHER" />
+41-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:27:17-77
+41-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:27:27-74
+42            </intent-filter>
+43
+44            <meta-data
+44-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:30:13-32:36
+45                android:name="android.app.lib_name"
+45-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:31:17-52
+46                android:value="" />
+46-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:32:17-33
+47        </activity>
+48        <activity
+48-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:35:9-42:20
+49            android:name="com.github.user.soilitouraplication.ui.detection.DetailDetectionActivity"
+49-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:36:13-65
+50            android:exported="true" >
+50-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:37:13-36
+51            <meta-data
+51-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:30:13-32:36
+52                android:name="android.app.lib_name"
+52-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:31:17-52
+53                android:value="" />
+53-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:32:17-33
+54        </activity>
+55        <activity
+55-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:44:9-51:20
+56            android:name="com.github.user.soilitouraplication.ui.fullcampaign.FullCampaign"
+56-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:45:13-57
+57            android:exported="true" >
+57-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:46:13-36
+58            <meta-data
+58-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:30:13-32:36
+59                android:name="android.app.lib_name"
+59-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:31:17-52
+60                android:value="" />
+60-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:32:17-33
+61        </activity>
+62        <activity
+62-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:53:9-60:20
+63            android:name="com.github.user.soilitouraplication.ui.detection.ClassifierActivity"
+63-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:54:13-60
+64            android:exported="true" >
+64-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:55:13-36
+65            <meta-data
+65-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:30:13-32:36
+66                android:name="android.app.lib_name"
+66-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:31:17-52
+67                android:value="" />
+67-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:32:17-33
+68        </activity>
+69        <activity
+69-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:62:9-69:20
+70            android:name="com.github.user.soilitouraplication.ui.history.DetailHistory"
+70-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:63:13-53
+71            android:exported="true" >
+71-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:64:13-36
+72            <meta-data
+72-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:30:13-32:36
+73                android:name="android.app.lib_name"
+73-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:31:17-52
+74                android:value="" />
+74-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:32:17-33
+75        </activity>
+76
+77        <meta-data
+77-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:71:9-73:57
+78            android:name="preloaded_fonts"
+78-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:72:13-43
+79            android:resource="@array/preloaded_fonts" />
+79-->D:\SoilitOurAplication\app\src\main\AndroidManifest.xml:73:13-54
+80
+81        <activity
+81-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:23:9-27:75
+82            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+82-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:24:13-93
+83            android:excludeFromRecents="true"
+83-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:25:13-46
+84            android:exported="false"
+84-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:26:13-37
+85            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+85-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:27:13-72
+86        <!--
+87            Service handling Google Sign-In user revocation. For apps that do not integrate with
+88            Google Sign-In, this service will never be started.
+89        -->
+90        <service
+90-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:33:9-37:51
+91            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+91-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:34:13-89
+92            android:exported="true"
+92-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:35:13-36
+93            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+93-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:36:13-107
+94            android:visibleToInstantApps="true" />
+94-->[com.google.android.gms:play-services-auth:19.2.0] D:\StoryApp-master\caches\transforms-3\64004c2b56e74e0da4380673171aa248\transformed\play-services-auth-19.2.0\AndroidManifest.xml:37:13-48
+95
+96        <activity
+96-->[com.google.android.gms:play-services-base:17.5.0] D:\StoryApp-master\caches\transforms-3\c23f497d62dc25e5bb85cac6f0ad4fe7\transformed\play-services-base-17.5.0\AndroidManifest.xml:23:9-26:75
+97            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+97-->[com.google.android.gms:play-services-base:17.5.0] D:\StoryApp-master\caches\transforms-3\c23f497d62dc25e5bb85cac6f0ad4fe7\transformed\play-services-base-17.5.0\AndroidManifest.xml:24:13-79
+98            android:exported="false"
+98-->[com.google.android.gms:play-services-base:17.5.0] D:\StoryApp-master\caches\transforms-3\c23f497d62dc25e5bb85cac6f0ad4fe7\transformed\play-services-base-17.5.0\AndroidManifest.xml:25:13-37
+99            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+99-->[com.google.android.gms:play-services-base:17.5.0] D:\StoryApp-master\caches\transforms-3\c23f497d62dc25e5bb85cac6f0ad4fe7\transformed\play-services-base-17.5.0\AndroidManifest.xml:26:13-72
+100
+101        <meta-data
+101-->[com.google.android.gms:play-services-basement:17.5.0] D:\StoryApp-master\caches\transforms-3\33fbb6b57fdcb81661e16103c1f67740\transformed\play-services-basement-17.5.0\AndroidManifest.xml:23:9-25:69
+102            android:name="com.google.android.gms.version"
+102-->[com.google.android.gms:play-services-basement:17.5.0] D:\StoryApp-master\caches\transforms-3\33fbb6b57fdcb81661e16103c1f67740\transformed\play-services-basement-17.5.0\AndroidManifest.xml:24:13-58
+103            android:value="@integer/google_play_services_version" />
+103-->[com.google.android.gms:play-services-basement:17.5.0] D:\StoryApp-master\caches\transforms-3\33fbb6b57fdcb81661e16103c1f67740\transformed\play-services-basement-17.5.0\AndroidManifest.xml:25:13-66
+104
+105        <service
+105-->[androidx.room:room-runtime:2.5.0-alpha02] D:\StoryApp-master\caches\transforms-3\e4268020e2e191b6180e8c6d0e26f171\transformed\room-runtime-2.5.0-alpha02\AndroidManifest.xml:25:9-29:63
+106            android:name="androidx.room.MultiInstanceInvalidationService"
+106-->[androidx.room:room-runtime:2.5.0-alpha02] D:\StoryApp-master\caches\transforms-3\e4268020e2e191b6180e8c6d0e26f171\transformed\room-runtime-2.5.0-alpha02\AndroidManifest.xml:26:13-74
+107            android:directBootAware="true"
+107-->[androidx.room:room-runtime:2.5.0-alpha02] D:\StoryApp-master\caches\transforms-3\e4268020e2e191b6180e8c6d0e26f171\transformed\room-runtime-2.5.0-alpha02\AndroidManifest.xml:27:13-43
+108            android:exported="false" />
+108-->[androidx.room:room-runtime:2.5.0-alpha02] D:\StoryApp-master\caches\transforms-3\e4268020e2e191b6180e8c6d0e26f171\transformed\room-runtime-2.5.0-alpha02\AndroidManifest.xml:28:13-37
+109        <service
+109-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:24:9-33:19
+110            android:name="androidx.camera.core.impl.MetadataHolderService"
+110-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:25:13-75
+111            android:enabled="false"
+111-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:26:13-36
+112            android:exported="false" >
+112-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:27:13-37
+113            <meta-data
+113-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:30:13-32:89
+114                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+114-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:31:17-103
+115                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+115-->[androidx.camera:camera-camera2:1.2.2] D:\StoryApp-master\caches\transforms-3\feb0cad5c131c5e3b0e92f3bb2e93363\transformed\camera-camera2-1.2.2\AndroidManifest.xml:32:17-86
+116        </service>
+117
+118        <provider
+118-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+119            android:name="androidx.startup.InitializationProvider"
+119-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+120            android:authorities="com.github.user.soilitouraplication.androidx-startup"
+120-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+121            android:exported="false" >
+121-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+122            <meta-data
+122-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+123                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+123-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+124                android:value="androidx.startup" />
+124-->[androidx.emoji2:emoji2:1.2.0] D:\StoryApp-master\caches\transforms-3\848773e611bbde5d3ec0ec3e63d01c98\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+125            <meta-data
+125-->[androidx.lifecycle:lifecycle-process:2.4.1] D:\StoryApp-master\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+126                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+126-->[androidx.lifecycle:lifecycle-process:2.4.1] D:\StoryApp-master\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+127                android:value="androidx.startup" />
+127-->[androidx.lifecycle:lifecycle-process:2.4.1] D:\StoryApp-master\caches\transforms-3\a4f0fb44e9b56370f8c2ed23c9d5d030\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+128        </provider>
+129    </application>
+130
+131</manifest>

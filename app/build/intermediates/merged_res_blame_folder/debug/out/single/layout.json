@@ -1,0 +1,50 @@
+[
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\activity_detail_detection.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\activity_detail_detection.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\result_dialog_layout.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\result_dialog_layout.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\fragment_history.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\fragment_history.xml"
+    },
+    {
+        "merged": "com.github.user.soilitouraplication.app-mergeDebugResources-4:/layout/activity_main.xml",
+        "source": "com.github.user.soilitouraplication.app-main-7:/layout/activity_main.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\history_item.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\history_item.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\activity_detail_history.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\activity_detail_history.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\activity_main.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\activity_full_campaign.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\activity_full_campaign.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\fragment_home.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\fragment_home.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\campaign_item.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\campaign_item.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\full_campaign_item.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\full_campaign_item.xml"
+    },
+    {
+        "merged": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-mergeDebugResources-4:\\layout\\activity_classifier.xml",
+        "source": "D:\\StoryApp-master\\daemon\\7.4\\com.github.user.soilitouraplication.app-main-7:\\layout\\activity_classifier.xml"
+    }
+]
