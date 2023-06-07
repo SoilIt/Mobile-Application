@@ -3,6 +3,10 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+<<<<<<< HEAD
+        jcenter()
+=======
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
     }
 }
 dependencyResolutionManagement {
@@ -12,5 +16,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+<<<<<<< HEAD
+rootProject.name = "CapstoneSoilit"
+=======
 rootProject.name = "SoilIt!"
+>>>>>>> e0d9eefb1e469cc034a05133bdedfbea14ebe763
 include ':app'
