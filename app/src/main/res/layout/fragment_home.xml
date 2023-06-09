@@ -27,23 +27,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/layout_margin"
                 android:layout_marginTop="@dimen/layout_margin_top"
+                android:gravity="center_vertical|center_horizontal"
+                android:orientation="horizontal"
                 tools:ignore="UseCompoundDrawables">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:fontFamily="@font/poppins_bold"
+                    android:gravity="left"
                     android:text="@string/Home"
                     android:textColor="@color/white"
                     android:textSize="@dimen/text_size_large" />
 
-                <ImageView
-                    android:layout_width="@dimen/icon_size"
-                    android:layout_height="@dimen/icon_size"
-                    android:layout_marginStart="@dimen/icon_margin_start"
-                    android:src="@drawable/person"
-                    android:contentDescription="@string/Home"/>
+                <LinearLayout
+                    android:id="@+id/go_to_profile_fragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right">
+
+                    <TextView
+                        android:id="@+id/hi_user"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_large"
+                        android:layout_marginEnd="4dp"
+                        android:text="@string/Hiuser" />
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:contentDescription="@string/Home"
+                        android:gravity="right"
+                        android:src="@drawable/person" />
+                </LinearLayout>
             </LinearLayout>
 
             <TextView
@@ -86,9 +108,9 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/card_layout_height"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="@dimen/card_layout_margin_top"
                 android:layout_marginRight="20dp"
-                android:layout_marginLeft="20dp"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/dateTextView">
@@ -161,8 +183,8 @@
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
                 android:layout_marginStart="10dp"
-                android:src="@drawable/campaign"
-                android:contentDescription="@string/Campaign" />
+                android:contentDescription="@string/Campaign"
+                android:src="@drawable/campaign" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -203,9 +225,9 @@
                 android:layout_width="@dimen/campaign_loader_width"
                 android:layout_height="@dimen/campaign_loader_height"
                 android:layout_gravity="center"
+                android:contentDescription="@string/Loader"
                 android:src="@drawable/campaignloader"
-                android:visibility="gone"
-                android:contentDescription="@string/Loader" />
+                android:visibility="gone" />
 
         </FrameLayout>
 
@@ -214,10 +236,10 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/linear_faq_height"
             android:layout_marginLeft="@dimen/linear_layout_margin"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/linear_layout_margin"
             android:background="@drawable/rectanglebottom"
             android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/frameLayout2"
             app:layout_constraintVertical_bias="0.229"
@@ -227,8 +249,8 @@
                 android:layout_width="@dimen/faq_icon_width"
                 android:layout_height="@dimen/faq_icon_height"
                 android:layout_gravity="center"
-                android:src="@drawable/question"
-                android:contentDescription="@string/FAQ" />
+                android:contentDescription="@string/FAQ"
+                android:src="@drawable/question" />
 
             <TextView
                 android:layout_width="wrap_content"

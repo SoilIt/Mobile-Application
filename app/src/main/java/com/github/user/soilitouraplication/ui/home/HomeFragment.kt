@@ -9,8 +9,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.databinding.FragmentHomeBinding
+import com.github.user.soilitouraplication.ui.faq.FaqActivity
 import com.github.user.soilitouraplication.ui.fullcampaign.FullCampaign
+import com.github.user.soilitouraplication.ui.profile.ProfileFragment
 
 @Suppress("DEPRECATION")
 class HomeFragment : Fragment() {
@@ -41,6 +44,21 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireContext(), FullCampaign::class.java)
             startActivity(intent)
         }
+        
+        binding.goToProfileFragment.setOnClickListener {
+            val profileFragment = ProfileFragment()
+            val fragmentManager = requireActivity().supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.replace(R.id.container, profileFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
+        
+        binding.linearfaq.setOnClickListener {
+            val intent = Intent(requireContext(), FaqActivity::class.java)
+            startActivity(intent)
+        }
+        
         return binding.root
     }
 
