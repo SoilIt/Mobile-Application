@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.github.user.soilitouraplication.databinding.ActivityDetailCampaignBinding
 import com.github.user.soilitouraplication.utils.DateUtils
 
+@Suppress("DEPRECATION")
 class DetailCampaign : AppCompatActivity() {
     private lateinit var binding: ActivityDetailCampaignBinding
 

@@ -11,7 +11,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 
 
-
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
@@ -30,5 +29,4 @@ object DatabaseModule {
         ).build()
     }
 
-    //... your other provides functions...
 }

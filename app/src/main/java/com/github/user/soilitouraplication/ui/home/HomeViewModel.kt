@@ -14,13 +14,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.github.user.soilitouraplication.api.Campaign
 import com.github.user.soilitouraplication.api.RetrofitClient
-import com.github.user.soilitouraplication.api.UserResponse
-import com.google.gson.Gson
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.CacheControl
-import okhttp3.Request
 import javax.inject.Inject
 
 @Suppress("DEPRECATION")

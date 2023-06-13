@@ -1,16 +1,15 @@
 package com.github.user.soilitouraplication.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.github.user.soilitouraplication.R
+import com.github.user.soilitouraplication.database.HistoryDao
 import com.github.user.soilitouraplication.databinding.ActivityMainBinding
 import com.github.user.soilitouraplication.ui.detection.ClassifierActivity
 import com.github.user.soilitouraplication.ui.history.HistoryFragment
 import com.github.user.soilitouraplication.ui.home.HomeFragment
-import com.github.user.soilitouraplication.database.HistoryDao
-import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.ui.profile.ProfileFragment
 import com.github.user.soilitouraplication.ui.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint

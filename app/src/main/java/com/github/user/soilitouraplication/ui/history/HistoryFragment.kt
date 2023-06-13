@@ -18,11 +18,11 @@ import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.database.HistoryDao
-import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @AndroidEntryPoint
 @Suppress("DEPRECATION")
 class HistoryFragment : Fragment() {

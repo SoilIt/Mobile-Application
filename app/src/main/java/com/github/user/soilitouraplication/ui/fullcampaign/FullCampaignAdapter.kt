@@ -13,6 +13,7 @@ import com.github.user.soilitouraplication.api.Campaign
 import com.github.user.soilitouraplication.databinding.FullCampaignItemBinding
 import com.github.user.soilitouraplication.utils.DateUtils
 
+@Suppress("SameParameterValue")
 class FullCampaignAdapter(private val onItemClick: (Campaign) -> Unit) :
     RecyclerView.Adapter<FullCampaignAdapter.ViewHolder>() {
 

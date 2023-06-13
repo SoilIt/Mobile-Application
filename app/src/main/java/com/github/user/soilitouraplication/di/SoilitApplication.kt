@@ -5,5 +5,5 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class SoilitApplication : Application() {
-    // Kode tambahan jika diperlukan
+
 }
