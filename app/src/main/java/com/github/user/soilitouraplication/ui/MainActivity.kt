@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize fragments
-        homeFragment = HomeFragment(historyDao)
+        homeFragment = HomeFragment()
         historyFragment = HistoryFragment()
         profileFragment = ProfileFragment()
         settingsFragment = SettingsFragment()

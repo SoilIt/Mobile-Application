@@ -26,14 +26,18 @@ import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Suppress("DEPRECATION")
 @AndroidEntryPoint
-class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAdapter.OnItemClickListener  {
+class HomeFragment : Fragment(), CampaignAdapter.OnItemClickListener  {
     private lateinit var campaignAdapter: CampaignAdapter
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
     private var recyclerViewState: Parcelable? = null
+
+    @Inject
+    lateinit var historyDao: HistoryDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
