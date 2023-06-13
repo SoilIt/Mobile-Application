@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.widget.addTextChangedListener
-import com.github.user.soilitouraplication.MainActivity
+import com.github.user.soilitouraplication.ui.MainActivity
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.databinding.ActivityChangePasswordBinding
 import com.github.user.soilitouraplication.utils.Validate

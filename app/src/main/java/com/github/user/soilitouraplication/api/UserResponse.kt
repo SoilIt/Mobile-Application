@@ -6,13 +6,13 @@ import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
 data class UserResponse(
-    val data: List<Campaign>,
+    val data: List<Campaign>
 )
 
 @Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
 data class Campaign(
-    val id: Int,
+    val id: String,
     val name: String,
     val description: String,
     val image: String,

@@ -1,11 +1,14 @@
 package com.github.user.soilitouraplication.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,11 +23,13 @@ import com.github.user.soilitouraplication.utils.DateUtils
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @Suppress("DEPRECATION")
-class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAdapter.OnItemClickListener {
+@AndroidEntryPoint
+class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAdapter.OnItemClickListener  {
     private lateinit var campaignAdapter: CampaignAdapter
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
@@ -53,36 +58,39 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
             val intent = Intent(requireContext(), FullCampaign::class.java)
             startActivity(intent)
         }
-        
+
         binding.goToProfileFragment.setOnClickListener {
 //            TODO: Go to profile fragment
         }
-        
+
         binding.linearfaq.setOnClickListener {
             startActivity(Intent(requireContext(), FaqActivity::class.java))
         }
-        
+
         setUser()
-        
+
         return binding.root
     }
-    
+
+    @SuppressLint("SetTextI18n")
     private fun setUser() {
         val db = Firebase.firestore
         val user = Firebase.auth.currentUser
         val usedId = user?.uid
-        
+
         db.collection("users").whereEqualTo("uid", usedId)
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    val username = document.data["name"]
-                    
-                    binding.hiUser.text = "Hi, $username"
+                    val username = document.getString("name")
+                    val firstWord = username?.split(" ")?.get(0)
+                    binding.hiUser.text = "Hi, $firstWord"
+
                 }
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchCampaigns()

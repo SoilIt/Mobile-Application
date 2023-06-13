@@ -16,13 +16,16 @@ import com.github.user.soilitouraplication.api.Campaign
 import com.github.user.soilitouraplication.api.RetrofitClient
 import com.github.user.soilitouraplication.api.UserResponse
 import com.google.gson.Gson
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.CacheControl
 import okhttp3.Request
+import javax.inject.Inject
 
 @Suppress("DEPRECATION")
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class HomeViewModel @Inject constructor(application: Application) : AndroidViewModel(application) {
     private val campaigns = MutableLiveData<List<Campaign>>()
     val isLoading = MutableLiveData<Boolean>()
     private var savedState: List<Campaign>? = null
@@ -35,19 +38,14 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
             try {
                 // Cek apakah koneksi internet tersedia
                 if (isNetworkAvailable()) {
-                    val request = Request.Builder()
-                        .url("https://private-7a3f77-soilit.apiary-mock.com/campaign/limit")
-                        .cacheControl(CacheControl.FORCE_NETWORK)
-                        .build()
+                    val campaignApi = RetrofitClient.apiInstance()
+                    val response = campaignApi.getCampaigns().execute()
 
-                    val response = RetrofitClient.okHttpClient.newCall(request).execute()
 
                     if (response.isSuccessful) {
-                        val responseData = response.body()?.string()
-                        val userResponse =
-                            Gson().fromJson(responseData, UserResponse::class.java)
+                        val userResponse = response.body()
                         // Jika ada data yang tersimpan, gunakan data tersebut daripada data yang diambil
-                        val campaignList = savedState ?: userResponse.data
+                        val campaignList = savedState ?: userResponse!!.data
                         campaigns.postValue(campaignList)
                     } else {
                         Log.d("Failure", "Request failed with code: ${response.code()}")

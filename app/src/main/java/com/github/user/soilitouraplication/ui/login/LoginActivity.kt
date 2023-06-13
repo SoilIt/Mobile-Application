@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.github.user.soilitouraplication.MainActivity
+import com.github.user.soilitouraplication.ui.MainActivity
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.databinding.ActivityLoginBinding
 import com.github.user.soilitouraplication.ui.signup.RegisterActivity

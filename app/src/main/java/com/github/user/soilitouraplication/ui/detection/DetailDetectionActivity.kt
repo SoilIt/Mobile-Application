@@ -6,13 +6,18 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.github.user.soilitouraplication.MainActivity
+import com.github.user.soilitouraplication.ui.MainActivity
+import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.api.TemperatureResponse
 import com.github.user.soilitouraplication.database.HistoryDao
@@ -28,6 +33,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.util.*
 
 class DetailDetectionActivity : AppCompatActivity() {
@@ -56,6 +62,10 @@ class DetailDetectionActivity : AppCompatActivity() {
             saveToDatabase()
         }
 
+        binding.btnexporttopdf.setOnClickListener {
+            exportToPdf()
+        }
+
         binding.btndetectsoildetail.setOnClickListener {
             showToast("Getting data from Soil Sensor...") // Show initial toast message
 
@@ -70,7 +80,8 @@ class DetailDetectionActivity : AppCompatActivity() {
                     val responseBody = response.body()?.string()
 
                     val gson = Gson()
-                    val temperatureResponse = gson.fromJson(responseBody, TemperatureResponse::class.java)
+                    val temperatureResponse =
+                        gson.fromJson(responseBody, TemperatureResponse::class.java)
                     val temperatureValue = temperatureResponse.value
 
                     withContext(Dispatchers.Main) {
@@ -116,6 +127,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     plantRecommendation =
                         PlantRecommendation("gambut", listOf("Tanaman Cabai", "Jagung"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("humus") -> {
                     soilDetail = SoilDetail(
                         "humus",
@@ -123,6 +135,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("humus", listOf("Padi", "Selada"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("aluvial") -> {
                     soilDetail = SoilDetail(
                         "aluvial",
@@ -131,6 +144,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     plantRecommendation =
                         PlantRecommendation("aluvial", listOf("Bunga Mawar", "Sawi"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("laterit") -> {
                     soilDetail = SoilDetail(
                         "laterit",
@@ -139,6 +153,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     plantRecommendation =
                         PlantRecommendation("laterit", listOf("Tanaman kopi", "Cengkeh"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("litosol") -> {
                     soilDetail = SoilDetail(
                         "litosol",
@@ -147,6 +162,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     plantRecommendation =
                         PlantRecommendation("litosol", listOf("Singkong", "Tanaman Karet"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("kapur") -> {
                     soilDetail = SoilDetail(
                         "kapur",
@@ -154,6 +170,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("kapur", listOf("Apel", "Kedelai"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("liat") -> {
                     soilDetail = SoilDetail(
                         "liat",
@@ -162,6 +179,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     plantRecommendation =
                         PlantRecommendation("liat", listOf("Kayu Putih", "Kentang"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("organosol") -> {
                     soilDetail = SoilDetail(
                         "organosol",
@@ -169,6 +187,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("organosol", listOf("Bayam", "Padi"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("pasir") -> {
                     soilDetail = SoilDetail(
                         "pasir",
@@ -176,6 +195,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("pasir", listOf("Singkong", "Kaktus"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("regosol") -> {
                     soilDetail = SoilDetail(
                         "regosol",
@@ -183,6 +203,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("regosol", listOf("Mangga", "Tomat"))
                 }
+
                 tvTextResultsText.lowercase(Locale.getDefault()).contains("vulkanik") -> {
                     soilDetail = SoilDetail(
                         "vulkanik",
@@ -190,6 +211,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                     )
                     plantRecommendation = PlantRecommendation("vulkanik", listOf("Bawang", "Sawi"))
                 }
+
                 else -> {
                     soilDetail = null
                     plantRecommendation = null
@@ -310,10 +332,47 @@ class DetailDetectionActivity : AppCompatActivity() {
         finish()
     }
 
-
     private fun getHistoryDao(): HistoryDao {
         val database = HistoryDatabase.getInstance(applicationContext)
         return database.historyDao()
     }
 
+    private fun exportToPdf() {
+        val pdfDocument = PdfDocument()
+        val pageInfo =
+            PdfDocument.PageInfo.Builder(binding.root.width, binding.root.height, 1).create()
+        val page = pdfDocument.startPage(pageInfo)
+        val canvas = page.canvas
+        val paint = Paint()
+
+        val background = ContextCompat.getDrawable(this, R.drawable.background)
+        background?.setBounds(0, 0, binding.root.width, binding.root.height)
+        background?.draw(canvas)
+
+        canvas.save()
+        canvas.translate(0f, 0f)
+        binding.root.draw(canvas)
+        canvas.restore()
+
+        pdfDocument.finishPage(page)
+
+        try {
+            val storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
+            val fileName = "soil_detection_report.pdf"
+            val file = File(storageDir, fileName)
+            val fileOutputStream = FileOutputStream(file)
+            pdfDocument.writeTo(fileOutputStream)
+            pdfDocument.close()
+            fileOutputStream.close()
+            showToast("PDF exported successfully: ${file.absolutePath}")
+        } catch (e: IOException) {
+            e.printStackTrace()
+            showToast("Failed to export PDF")
+        }
+    }
 }
+
+
+
+
+
