@@ -29,6 +29,8 @@ object RetrofitClient {
     fun apiInstance(): CampaignApi {
         return retrofit.create(CampaignApi::class.java)
     }
-
-
+    
+    fun apiInstanceFaq(): FaqApi {
+        return retrofit.create(FaqApi::class.java)
+    }
 }

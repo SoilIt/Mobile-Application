@@ -14,6 +14,11 @@ interface HistoryApi {
     fun getHistory(): Call<HistoryResponse>
 }
 
+interface FaqApi {
+    @GET("/faq")
+    fun getFaq(): Call<FaqResponse>
+}
+
 
 interface PostDetectionApi {
     @POST("/history")

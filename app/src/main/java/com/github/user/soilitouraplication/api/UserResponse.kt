@@ -25,6 +25,16 @@ data class HistoryResponse(
     val data: List<History>,
 )
 
+data class FaqResponse(
+    val message: String?,
+    val data: List<FaqClass>,
+)
+
+data class FaqClass(
+    val answer: String,
+    val question: String,
+)
+
 data class TemperatureResponse(
     val type: String,
     val value: Int,
