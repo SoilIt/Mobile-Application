@@ -76,9 +76,9 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
             .get()
             .addOnSuccessListener { documents ->
                 for (document in documents) {
-                    val username = document.data["name"]
-                    
-                    binding.hiUser.text = "Hi, $username"
+                    val username = document.getString("name")
+                    val firstWord = username?.split(" ")?.get(0)
+                    binding.hiUser.text = "Hi, $firstWord"
                 }
             }
     }
