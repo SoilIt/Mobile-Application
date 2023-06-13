@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "646058238608-ptjjhgl5udh0dd622ru90qh03biqmavf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.github.user.soilitouraplication",
+            "certificate_hash": "aa9758b8e86b18b09f8a7e1dd4f65360a05dca3e"
+          }
+        },
+        {
           "client_id": "646058238608-vridd29tv5m7br0dicedr0b3ld8luolr.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

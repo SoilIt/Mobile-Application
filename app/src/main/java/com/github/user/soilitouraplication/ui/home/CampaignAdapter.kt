@@ -76,7 +76,7 @@ class CampaignAdapter : RecyclerView.Adapter<CampaignAdapter.ViewHolder>() {
         holder.bind(list[position])
     }
 
-    override fun getItemCount(): Int = minOf(list.size, 3)
+    override fun getItemCount(): Int = minOf(list.size, 6)
 
 
     interface OnItemClickListener {
