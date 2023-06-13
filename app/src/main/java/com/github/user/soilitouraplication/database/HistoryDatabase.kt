@@ -10,24 +10,4 @@ import com.github.user.soilitouraplication.api.History
 abstract class HistoryDatabase : RoomDatabase() {
     abstract fun historyDao(): HistoryDao
 
-    companion object {
-        private const val DATABASE_NAME = "app_database"
-
-        @Volatile
-        private var INSTANCE: HistoryDatabase? = null
-
-        fun getInstance(context: Context): HistoryDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    HistoryDatabase::class.java,
-                    DATABASE_NAME
-                )
-                    .fallbackToDestructiveMigration()
-                    .build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
 }

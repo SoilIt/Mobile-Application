@@ -24,6 +24,7 @@ import com.github.user.soilitouraplication.database.HistoryDao
 import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.ActivityDetailDetectionBinding
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,12 +36,15 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class DetailDetectionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailDetectionBinding
     private var byteArray: ByteArray? = null
-    private lateinit var historyDao: HistoryDao
+    @Inject
+    lateinit var historyDao: HistoryDao
 
     data class SoilDetail(val label: String, val description: String)
     data class PlantRecommendation(val label: String, val plants: List<String>)
@@ -56,7 +60,7 @@ class DetailDetectionActivity : AppCompatActivity() {
         setContentView(view)
 
         // Initialize the historyDao instance from your implementation
-        historyDao = getHistoryDao()
+//        historyDao = getHistoryDao()
 
         binding.btnsave.setOnClickListener {
             saveToDatabase()
@@ -332,10 +336,10 @@ class DetailDetectionActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun getHistoryDao(): HistoryDao {
-        val database = HistoryDatabase.getInstance(applicationContext)
-        return database.historyDao()
-    }
+//    private fun getHistoryDao(): HistoryDao {
+//        val database = HistoryDatabase.getInstance(applicationContext)
+//        return database.historyDao()
+//    }
 
     private fun exportToPdf() {
         val pdfDocument = PdfDocument()

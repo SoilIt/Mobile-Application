@@ -20,8 +20,10 @@ import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.database.HistoryDao
 import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.FragmentHistoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+import javax.inject.Inject
+@AndroidEntryPoint
 @Suppress("DEPRECATION")
 class HistoryFragment : Fragment() {
 
@@ -33,8 +35,10 @@ class HistoryFragment : Fragment() {
     private lateinit var itemTouchHelper: ItemTouchHelper
     val historyList: MutableList<History> = mutableListOf()
 
+
     // Dependency Injection
-    internal lateinit var historyDao: HistoryDao
+    @Inject
+    lateinit var historyDao: HistoryDao
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var isRefreshing = false
@@ -60,9 +64,6 @@ class HistoryFragment : Fragment() {
 
         historyAdapter = HistoryAdapter()
         recyclerView.adapter = historyAdapter
-
-        val historyDatabase = HistoryDatabase.getInstance(requireContext())
-        historyDao = historyDatabase.historyDao()
 
         lifecycleScope.launch {
             historyDao.getAllHistory().collect { historyList ->

@@ -14,6 +14,7 @@ import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.ui.profile.ProfileFragment
 import com.github.user.soilitouraplication.ui.settings.SettingsFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var historyFragment: HistoryFragment
     private lateinit var profileFragment: ProfileFragment
     private lateinit var settingsFragment: SettingsFragment
-    private lateinit var historyDao: HistoryDao
+    @Inject
+    lateinit var historyDao: HistoryDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +37,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Initialize database and DAO
-        val database = HistoryDatabase.getInstance(applicationContext)
-        historyDao = database.historyDao()
 
         binding.bottomNavigationView.setOnItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
