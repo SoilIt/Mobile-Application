@@ -13,9 +13,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.user.soilitouraplication.api.Campaign
 import com.github.user.soilitouraplication.database.HistoryDao
 import com.github.user.soilitouraplication.databinding.FragmentHomeBinding
+import com.github.user.soilitouraplication.ui.faq.FaqActivity
 import com.github.user.soilitouraplication.ui.fullcampaign.FullCampaign
 import com.github.user.soilitouraplication.ui.fullcampaign.DetailCampaign
 import com.github.user.soilitouraplication.utils.DateUtils
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -54,7 +58,29 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
 //            TODO: Go to profile fragment
         }
         
+        binding.linearfaq.setOnClickListener {
+            startActivity(Intent(requireContext(), FaqActivity::class.java))
+        }
+        
+        setUser()
+        
         return binding.root
+    }
+    
+    private fun setUser() {
+        val db = Firebase.firestore
+        val user = Firebase.auth.currentUser
+        val usedId = user?.uid
+        
+        db.collection("users").whereEqualTo("uid", usedId)
+            .get()
+            .addOnSuccessListener { documents ->
+                for (document in documents) {
+                    val username = document.data["name"]
+                    
+                    binding.hiUser.text = "Hi, $username"
+                }
+            }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
