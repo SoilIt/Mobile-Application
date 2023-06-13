@@ -34,6 +34,10 @@ class DetailCampaign : AppCompatActivity() {
         binding.tvtitle.text = campaignTitle
         binding.tvcampaigndescription.text = campaignDescription
         binding.tvcampaigndate.text = DateUtils.formatDateTimeCampaign(campaignDate.toString())
+        
+        binding.textView.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     companion object {
