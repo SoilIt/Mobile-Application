@@ -12,9 +12,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.github.user.soilitouraplication.R
+import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.FragmentSettingBinding
 import com.github.user.soilitouraplication.ui.changepassword.ChangePassword
 import com.github.user.soilitouraplication.ui.login.LoginActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
@@ -59,6 +63,11 @@ class SettingsFragment : Fragment() {
             ) { _, _ ->
                 FirebaseAuth.getInstance().signOut()
                 googleSignInClient.signOut().addOnCompleteListener {
+                    val database = HistoryDatabase.buildDatabase(requireContext())
+                    CoroutineScope(Dispatchers.IO).launch {
+                        database.historyDao().deleteAllHistory()
+                        database.close()
+                    }
                     val intent = Intent(activity, LoginActivity::class.java)
                     startActivity(intent)
                     activity?.finish()
