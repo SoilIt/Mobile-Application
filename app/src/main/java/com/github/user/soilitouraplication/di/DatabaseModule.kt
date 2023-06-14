@@ -22,11 +22,8 @@ object DatabaseModule {
 
     @Provides
     fun provideDatabase(@ApplicationContext appContext: Context): HistoryDatabase {
-        return Room.databaseBuilder(
-            appContext,
-            HistoryDatabase::class.java,
-            "HistoryDatabase"
-        ).build()
+        return HistoryDatabase.buildDatabase(appContext)
     }
+
 
 }

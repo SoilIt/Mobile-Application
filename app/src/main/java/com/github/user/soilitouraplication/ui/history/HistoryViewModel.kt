@@ -1,5 +1,6 @@
 package com.github.user.soilitouraplication.ui.history
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.user.soilitouraplication.api.History
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) : ViewModel() {
     val historyList: MutableLiveData<List<History>> = MutableLiveData()
+    val errorLiveData: MutableLiveData<String> = MutableLiveData()
 
     fun fetchHistory() {
         val user = Firebase.auth.currentUser
@@ -39,6 +41,9 @@ class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) :
 
             override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
                 // Handle failure
+                Log.e("HistoryViewModel", "Failed to fetch history: ${t.message}")
+                // Tambahan: Mengirim pesan kesalahan ke LiveData atau melakukan penanganan lainnya
+                errorLiveData.value = "Failed to fetch history. Please try again later."
             }
         })
     }
