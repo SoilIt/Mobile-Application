@@ -1,5 +1,6 @@
 package com.github.user.soilitouraplication.ui.history
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.user.soilitouraplication.api.History
@@ -17,7 +18,7 @@ import javax.inject.Inject
 class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) : ViewModel() {
     val historyList: MutableLiveData<List<History>> = MutableLiveData()
     val errorLiveData: MutableLiveData<String> = MutableLiveData()
-
+    
     val isSuccessDelete: MutableLiveData<Boolean> = MutableLiveData()
     
     fun fetchHistory() {
@@ -32,11 +33,19 @@ class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) :
             ) {
                 if (response.isSuccessful) {
                     val historyResponse = response.body()
-                    historyResponse?.data?.let { value ->
-                        historyList.value = value
+                    
+                    if (historyResponse?.data == null) {
+                        historyList.value = emptyList()
+                        errorLiveData.value = "History is empty"
+                        return
+                    } else {
+                        historyResponse?.data?.let { value ->
+                            historyList.value = value
+                        }
                     }
+                    
                 } else {
-                    Log.d("TAG", "onResponse: ${response.code()}")
+                    Log.d("TAG", "onResponse: ${response.message()}")
                 }
             }
             
@@ -50,14 +59,17 @@ class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) :
         })
     }
     
-    fun deleteHistory(id:String) {
+    fun deleteHistory(id: String) {
         val call = historyApi.deleteHistory(historyId = id)
         call.enqueue(object : Callback<HistoryResponse> {
             override fun onResponse(
                 call: Call<HistoryResponse>,
                 response: Response<HistoryResponse>,
             ) {
-                Log.d("TAG", "onResponse: ${response.body()}")
+                Log.d(
+                    "TAG",
+                    "onResponse: ${response.body()} ${id} ${response.headers()} ${response.raw()}"
+                )
                 isSuccessDelete.value = response.isSuccessful
             }
             
