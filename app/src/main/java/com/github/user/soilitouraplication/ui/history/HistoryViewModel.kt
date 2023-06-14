@@ -1,5 +1,6 @@
 package com.github.user.soilitouraplication.ui.history
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.github.user.soilitouraplication.api.History
@@ -16,11 +17,12 @@ import javax.inject.Inject
 @HiltViewModel
 class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) : ViewModel() {
     val historyList: MutableLiveData<List<History>> = MutableLiveData()
-
+    val isSuccessDelete: MutableLiveData<Boolean> = MutableLiveData()
+    
     fun fetchHistory() {
         val user = Firebase.auth.currentUser
         val userId = user?.uid
-
+        
         val call = historyApi.getHistory(userId = userId ?: "")
         call.enqueue(object : Callback<HistoryResponse> {
             override fun onResponse(
@@ -29,16 +31,33 @@ class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) :
             ) {
                 if (response.isSuccessful) {
                     val historyResponse = response.body()
-                    historyResponse?.data?.let { historyList ->
-                        this@HistoryViewModel.historyList.value = historyList
+                    historyResponse?.data?.let { value ->
+                        historyList.value = value
                     }
                 } else {
-                    // Handle error response
+                    Log.d("TAG", "onResponse: ${response.code()}")
                 }
             }
-
+            
             override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
-                // Handle failure
+                Log.d("TAG", "onFailure: ${t.message}")
+            }
+        })
+    }
+    
+    fun deleteHistory(id:String) {
+        val call = historyApi.deleteHistory(historyId = id)
+        call.enqueue(object : Callback<HistoryResponse> {
+            override fun onResponse(
+                call: Call<HistoryResponse>,
+                response: Response<HistoryResponse>,
+            ) {
+                Log.d("TAG", "onResponse: ${response.body()}")
+                isSuccessDelete.value = response.isSuccessful
+            }
+            
+            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
+                isSuccessDelete.value = false
             }
         })
     }

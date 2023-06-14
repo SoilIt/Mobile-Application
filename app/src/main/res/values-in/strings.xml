@@ -100,4 +100,5 @@
     </string>
 
     <string name="SavetoPDF">Export ke PDF</string>
+    <string name="delete_history_desc">Apakah kamu yakin akan menghapus history ini?</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.github.user.soilitouraplication.ui.history
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.res.Resources
 import android.graphics.*
 import android.os.Bundle
@@ -8,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -178,13 +180,15 @@ class HistoryFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val deletedItem = historyAdapter.getData()[position]
+    
+                onShowBackDialog(deletedItem.id.toString())
 
-                lifecycleScope.launch {
-                    historyDao.deleteHistory(deletedItem)
-                }
-
-                historyAdapter.removeAt(position)
-                historyAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+//                lifecycleScope.launch {
+//                    historyDao.deleteHistory(deletedItem)
+//                }
+//
+//                historyAdapter.removeAt(position)
+//                historyAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
         }
 
@@ -205,9 +209,10 @@ class HistoryFragment : Fragment() {
             try {
                 historyViewModel.fetchHistory()
                 historyViewModel.historyList.observe(viewLifecycleOwner) { historyList ->
-                    Log.d("TAG", "fetchHistory: $historyList")
                     this.historyList.clear()
                     this.historyList.addAll(historyList)
+    
+                    Log.d("WHYYYYY", "fetchHistory: $historyList")
                     historyAdapter.notifyDataSetChanged()
 
                     lifecycleScope.launch {
@@ -215,6 +220,10 @@ class HistoryFragment : Fragment() {
                         historyList.forEach { history ->
                             historyDao.insertHistory(history)
                         }
+    
+                        this@HistoryFragment.historyList.clear()
+                        this@HistoryFragment.historyList.addAll(historyList)
+                        historyAdapter.setData(historyList.toList())
                     }
                 }
             } catch (e: Exception) {
@@ -226,6 +235,50 @@ class HistoryFragment : Fragment() {
         } else {
             swipeRefreshLayout.isRefreshing = false
         }
+    }
+    
+    private fun onShowBackDialog(id:String) {
+        val alertDialogBuilder = AlertDialog.Builder(
+            requireContext()
+        )
+        
+        alertDialogBuilder
+            .setMessage(R.string.delete_history_desc)
+            .setCancelable(true)
+            .setPositiveButton(
+                R.string.yes
+            ) { _, _ ->
+                historyViewModel.deleteHistory(id)
+                
+                historyViewModel.isSuccessDelete.observe(viewLifecycleOwner) { isSuccess ->
+                    if (isSuccess) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.delete_history_success,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        
+                        fetchHistory()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.delete_history_failed,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        
+                        fetchHistory()
+                    }
+                }
+            }
+            .setNegativeButton(
+                R.string.no
+            ) { dialog, _ ->
+                dialog.cancel()
+            }
+        
+        val alertDialog = alertDialogBuilder.create()
+        
+        alertDialog.show()
     }
 }
 

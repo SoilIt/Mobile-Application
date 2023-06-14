@@ -122,5 +122,8 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="SavetoPDF">Export to PDF</string>
+    <string name="delete_history_desc">Are you sure want to delete this history?</string>
+    <string name="delete_history_success">History Deleted!</string>
+    <string name="delete_history_failed">Delete History Failed!</string>
 
 </resources>
