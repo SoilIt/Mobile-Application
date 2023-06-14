@@ -19,8 +19,7 @@ class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) :
 
     fun fetchHistory() {
         val user = Firebase.auth.currentUser
-        //val userId = user?.uid
-        val userId = "uM7G2wcaOcNkTyKHiDIksMc5QSC2"
+        val userId = user?.uid
 
         val call = historyApi.getHistory(userId = userId ?: "")
         call.enqueue(object : Callback<HistoryResponse> {
