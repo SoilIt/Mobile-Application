@@ -29,6 +29,7 @@
         val message: String
     )
 
+
     data class FaqResponse(
         val message: String?,
         val data: List<FaqClass>,
@@ -48,12 +49,12 @@
 
     @Entity(tableName = "history")
     data class History(
-        @PrimaryKey(autoGenerate = true) val id: Int,
+        @PrimaryKey val id: String,
         val image: String,
         val user_id: String,
         val soil_type: String,
-        val soil_moisture: Int,
-        val soil_temperature: Int,
+        val soil_moisture: String,
+        val soil_temperature: String,
         val soil_condition: String,
         val created_at: String,
     )

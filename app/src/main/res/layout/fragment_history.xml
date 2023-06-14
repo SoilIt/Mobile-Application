@@ -23,45 +23,14 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="0dp"
+        >
 
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="right"
-            android:layout_marginTop="17dp"
-            android:layout_marginRight="25dp"
-            android:background="@drawable/search" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="8dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/green_outline"
-                android:inputType="text"
-                android:textColor="@color/green_primary"
-                android:textColorHint="@color/green_primary">
-
-                <requestFocus />
-
-            </com.google.android.material.textfield.TextInputEditText>
-
-
-        </com.google.android.material.textfield.TextInputLayout>
 
 
     </FrameLayout>

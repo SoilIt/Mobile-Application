@@ -209,7 +209,7 @@ class LoginActivity : AppCompatActivity() {
                 onLoading(false)
             }
         } else {
-            // Tampilkan pesan bahwa akun Google tidak berhasil dipilih
+
             Toast.makeText(this, "Failed to select Google account", Toast.LENGTH_SHORT).show()
             onLoading(false)
         }

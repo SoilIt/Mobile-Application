@@ -51,7 +51,8 @@ class ClassifierActivity : AppCompatActivity() {
         classifier = Classifier.create(assets, MODEL_PATH, LABEL_PATH, INPUT_SIZE)
 
         val resultDialog = Dialog(this)
-        val customProgressView = LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
+        val customProgressView =
+            LayoutInflater.from(this).inflate(R.layout.result_dialog_layout, null)
         resultDialog.setCancelable(false)
         resultDialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         resultDialog.setContentView(customProgressView)
@@ -81,13 +82,13 @@ class ClassifierActivity : AppCompatActivity() {
                     resultDialog.show()
                     tvTextResults.visibility = View.GONE
                     ivImageResult.visibility = View.GONE
-                    imageCapture.takePicture(
-                        cameraExecutor,
+                    imageCapture.takePicture(cameraExecutor,
                         object : ImageCapture.OnImageCapturedCallback() {
                             override fun onCaptureSuccess(image: ImageProxy) {
                                 val bitmap = imageProxyToBitmap(image)
                                 image.close()
-                                val scaledBitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false)
+                                val scaledBitmap =
+                                    Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, false)
                                 val results = classifier.recognizeImage(scaledBitmap)
                                 runOnUiThread {
                                     ivImageResult.setImageBitmap(scaledBitmap)
@@ -100,7 +101,9 @@ class ClassifierActivity : AppCompatActivity() {
 
                                     val currentDate = getCurrentDate()
                                     val currentTime = getCurrentTime()
-                                    val intent = Intent(this@ClassifierActivity, DetailDetectionActivity::class.java)
+                                    val intent = Intent(
+                                        this@ClassifierActivity, DetailDetectionActivity::class.java
+                                    )
                                     intent.putExtra("results", results.toString())
                                     intent.putExtra("tvTextResults", tvTextResults.text.toString())
                                     intent.putExtra("currentDate", currentDate)
@@ -119,8 +122,7 @@ class ClassifierActivity : AppCompatActivity() {
                                 // Handle capture error
                                 exception.printStackTrace()
                             }
-                        }
-                    )
+                        })
                 }
 
                 resultDialog.setOnDismissListener {
@@ -131,7 +133,9 @@ class ClassifierActivity : AppCompatActivity() {
                 makeButtonVisible()
 
                 if (!allPermissionsGranted()) {
-                    ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                    ActivityCompat.requestPermissions(
+                        this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+                    )
                 }
             } catch (exc: Exception) {
                 // Handle camera binding exception
@@ -163,7 +167,11 @@ class ClassifierActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray,
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (!allPermissionsGranted()) {
@@ -180,6 +188,22 @@ class ClassifierActivity : AppCompatActivity() {
     private fun getCurrentTime(): String {
         return SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date())
     }
+}
+
+interface SoilClassifier {
+    data class Recognition(
+        var id: String = "", // A unique identifier for what has been recognized. Specific to the class, not the instance of the object.
+        var title: String = "", // Display name for the recognition.
+        var confidence: Float = 0F, // A sortable score for how good the recognition is relative to others. Higher should be better.
+    ) {
+        override fun toString(): String {
+            return title
+        }
+    }
+
+    fun recognizeImage(bitmap: Bitmap): Recognition
+
+    fun close()
 }
 
 
