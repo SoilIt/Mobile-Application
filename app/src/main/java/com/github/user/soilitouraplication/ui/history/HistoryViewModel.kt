@@ -5,14 +5,19 @@ import androidx.lifecycle.ViewModel
 import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.api.HistoryResponse
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-class HistoryViewModel(private val historyApi: HistoryApi) : ViewModel() {
+class HistoryViewModel (private val historyApi: HistoryApi) : ViewModel() {
     val historyList: MutableLiveData<List<History>> = MutableLiveData()
 
     fun fetchHistory() {
-        val call = historyApi.getHistory()
+        val user = Firebase.auth.currentUser
+        val userId = user?.uid
+        
+        val call = historyApi.getHistory(userId = userId ?: "")
         call.enqueue(object : Callback<HistoryResponse> {
             override fun onResponse(
                 call: Call<HistoryResponse>,

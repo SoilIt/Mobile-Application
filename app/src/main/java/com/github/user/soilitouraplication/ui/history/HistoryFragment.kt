@@ -49,6 +49,8 @@ class HistoryFragment : Fragment() {
     ): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val view = binding.root
+    
+//        historyViewModel = ViewModelProvider(this)[HistoryViewModel::class.java]
 
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
@@ -198,7 +200,6 @@ class HistoryFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = true
 
             try {
-
                 historyViewModel.fetchHistory()
                 historyViewModel.historyList.observe(viewLifecycleOwner) { historyList ->
                     this.historyList.clear()
