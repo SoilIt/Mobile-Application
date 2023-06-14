@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.databinding.FragmentSettingBinding
@@ -15,6 +18,7 @@ import com.github.user.soilitouraplication.ui.login.LoginActivity
 
 class SettingsFragment : Fragment() {
     private lateinit var binding: FragmentSettingBinding
+    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,7 +26,7 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSettingBinding.inflate(inflater, container, false)
-
+        initializeGoogleSignIn()
         return binding.root
     }
 
@@ -54,9 +58,11 @@ class SettingsFragment : Fragment() {
                 R.string.logout
             ) { _, _ ->
                 FirebaseAuth.getInstance().signOut()
-                val intent = Intent(activity, LoginActivity::class.java)
-                startActivity(intent)
-                activity?.finish()
+                googleSignInClient.signOut().addOnCompleteListener {
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+                }
             }
             .setNegativeButton(
                 R.string.cancel
@@ -68,5 +74,14 @@ class SettingsFragment : Fragment() {
 
         alertDialog.show()
     }
+
+    private fun initializeGoogleSignIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(requireContext(), gso)
+    }
 }
+
 
