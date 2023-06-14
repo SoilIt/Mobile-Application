@@ -126,6 +126,10 @@ dependencies {
     //Hilt
     implementation("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
+    //OKhttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
+
 //    LeakCannary
 //    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 //    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:2.7'

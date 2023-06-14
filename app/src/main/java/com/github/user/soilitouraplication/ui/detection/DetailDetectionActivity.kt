@@ -1,11 +1,9 @@
-@file:Suppress("SameParameterValue")
+@file:Suppress("SameParameterValue", "ControlFlowWithEmptyBody")
 
 package com.github.user.soilitouraplication.ui.detection
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Paint
 import android.graphics.pdf.PdfDocument
 import android.os.Bundle
@@ -14,15 +12,16 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.github.user.soilitouraplication.ui.MainActivity
 import com.github.user.soilitouraplication.R
-import com.github.user.soilitouraplication.api.History
+import com.github.user.soilitouraplication.api.HistoryPostResponse
+import com.github.user.soilitouraplication.api.PostDetectionApi
 import com.github.user.soilitouraplication.api.TemperatureResponse
 import com.github.user.soilitouraplication.database.HistoryDao
-import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.ActivityDetailDetectionBinding
+import com.github.user.soilitouraplication.ui.MainActivity
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -30,8 +29,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.OkHttpClient
-import okhttp3.Request
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -43,6 +49,7 @@ class DetailDetectionActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailDetectionBinding
     private var byteArray: ByteArray? = null
+
     @Inject
     lateinit var historyDao: HistoryDao
 
@@ -59,11 +66,8 @@ class DetailDetectionActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        // Initialize the historyDao instance from your implementation
-//        historyDao = getHistoryDao()
-
         binding.btnsave.setOnClickListener {
-            saveToDatabase()
+            postToAPI()
         }
 
         binding.btnexporttopdf.setOnClickListener {
@@ -81,7 +85,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                         .build()
 
                     val response = client.newCall(request).execute()
-                    val responseBody = response.body()?.string()
+                    val responseBody = response.body?.string()
 
                     val gson = Gson()
                     val temperatureResponse =
@@ -95,7 +99,7 @@ class DetailDetectionActivity : AppCompatActivity() {
                 } catch (e: Exception) {
                     e.printStackTrace()
                     withContext(Dispatchers.Main) {
-                        showToast("Soilit Sensor Not Connected") // Display error toast message
+                        showToast("Soil Sensor Not Connected") // Display error toast message
                     }
                 }
             }
@@ -280,45 +284,76 @@ class DetailDetectionActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun saveToDatabase() {
-        val soilType = binding.soilType.text.toString()
-        val currentDate = binding.date.text.toString()
-        val temperature = binding.temperature.text.toString().toIntOrNull() ?: 0
-
-        val imageUrl = if (byteArray != null) {
-            // Convert the byteArray to a Bitmap
-            val bitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray!!.size)
-
-            // Save the bitmap to a file
-            val uniqueFileName = "soil_image_${System.currentTimeMillis()}.jpg"
-            val file = File(cacheDir, uniqueFileName)
-            FileOutputStream(file).use { outputStream ->
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-                outputStream.flush()
-            }
+    private fun postToAPI() {
+        val user = Firebase.auth.currentUser
+        val userId = user?.uid
 
 
-            // Get the file path
-            file.absolutePath
-        } else {
-            "" // Set a default image URL if byteArray is null
-        }
+        val byteArray = intent.getByteArrayExtra("image")
+        val soilType = intent.getStringExtra("tvTextResults")
+        val temperature = binding.temperature.text.toString()
+        val moisture = binding.moisture.text.toString()
+        val soilcondition = binding.soilCondition.text.toString()
 
-        val history = History(
-            id = 0, // Assign an appropriate id value
-            image = imageUrl,
-            user_id = "", // Assign the correct user_id value
-            soil_type = soilType,
-            soil_moisture = 0, // Assign the correct soil_moisture value
-            soil_temperature = temperature, // Assign the correct soil_temperature value
-            soil_condition = "Poor", // Assign the correct soil_condition value
-            created_at = currentDate
-        )
+        if (byteArray != null) {
+            val file = File.createTempFile("temp_image", ".jpg")
+            val fileOutputStream = FileOutputStream(file)
+            fileOutputStream.write(byteArray)
+            fileOutputStream.close()
 
-        lifecycleScope.launch {
-            historyDao.insertHistory(history)
-            showToast("Data saved to the database")
-            navigateToMainActivity()
+            val fileReqBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+            val filePart = MultipartBody.Part.createFormData("file", "image.jpg", fileReqBody)
+
+            val userIdBody = (userId ?: "").toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilTypeBody = soilType!!.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilMoistureBody =
+               moisture.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilTemperatureBody =
+                temperature.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilConditionBody =
+                soilcondition.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            val retrofit = Retrofit.Builder()
+                .baseUrl("https://soilit-api-iwwdg24ftq-et.a.run.app/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val service = retrofit.create(PostDetectionApi::class.java)
+
+            val call = service.postHistory(
+                filePart,
+                userIdBody,
+                soilTypeBody,
+                soilMoistureBody,
+                soilTemperatureBody,
+                soilConditionBody
+            )
+
+            call.enqueue(object : Callback<HistoryPostResponse> {
+                override fun onResponse(
+                    call: Call<HistoryPostResponse>,
+                    response: Response<HistoryPostResponse>,
+                ) {
+                    if (response.isSuccessful) {
+                        val historyPostResponse = response.body()
+                        val message = historyPostResponse?.message
+                        Log.i("Retrofit", "Data uploaded successfully! Message: $message")
+                        showToast("Data uploaded successfully !")
+                        navigateToMainActivity()
+                    } else {
+                        val message = response.message()
+                        Log.e("Retrofit", "Data upload failed! Message: $message")
+                        showToast("Data upload failed !")
+                    }
+                }
+
+                override fun onFailure(call: Call<HistoryPostResponse>, t: Throwable) {
+                    val message = t.localizedMessage
+                    Log.e("Retrofit", "Error: $message")
+                    showToast("Error: $message")
+
+                }
+            })
         }
     }
 
@@ -336,18 +371,13 @@ class DetailDetectionActivity : AppCompatActivity() {
         finish()
     }
 
-//    private fun getHistoryDao(): HistoryDao {
-//        val database = HistoryDatabase.getInstance(applicationContext)
-//        return database.historyDao()
-//    }
-
     private fun exportToPdf() {
         val pdfDocument = PdfDocument()
         val pageInfo =
             PdfDocument.PageInfo.Builder(binding.root.width, binding.root.height, 1).create()
         val page = pdfDocument.startPage(pageInfo)
         val canvas = page.canvas
-        val paint = Paint()
+        Paint()
 
         val background = ContextCompat.getDrawable(this, R.drawable.background)
         background?.setBounds(0, 0, binding.root.width, binding.root.height)
@@ -360,23 +390,24 @@ class DetailDetectionActivity : AppCompatActivity() {
 
         pdfDocument.finishPage(page)
 
+        val dir = File(Environment.getExternalStorageDirectory().toString() + "/PDF")
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+        val fileName = "soil_report_${System.currentTimeMillis()}.pdf"
+        val file = File(dir, fileName)
         try {
-            val storageDir = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS)
-            val fileName = "soil_detection_report.pdf"
-            val file = File(storageDir, fileName)
-            val fileOutputStream = FileOutputStream(file)
-            pdfDocument.writeTo(fileOutputStream)
-            pdfDocument.close()
-            fileOutputStream.close()
-            showToast("PDF exported successfully: ${file.absolutePath}")
+            pdfDocument.writeTo(FileOutputStream(file))
+            Toast.makeText(
+                this,
+                "PDF saved successfully: ${file.absolutePath}",
+                Toast.LENGTH_SHORT
+            ).show()
         } catch (e: IOException) {
             e.printStackTrace()
-            showToast("Failed to export PDF")
+            Toast.makeText(this, "Failed to save PDF", Toast.LENGTH_SHORT).show()
         }
+
+        pdfDocument.close()
     }
 }
-
-
-
-
-
