@@ -7,16 +7,21 @@ import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.api.HistoryResponse
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-class HistoryViewModel (private val historyApi: HistoryApi) : ViewModel() {
+import javax.inject.Inject
+
+@HiltViewModel
+class HistoryViewModel @Inject constructor(private val historyApi: HistoryApi) : ViewModel() {
     val historyList: MutableLiveData<List<History>> = MutableLiveData()
 
     fun fetchHistory() {
         val user = Firebase.auth.currentUser
-        val userId = user?.uid
-        
+        //val userId = user?.uid
+        val userId = "uM7G2wcaOcNkTyKHiDIksMc5QSC2"
+
         val call = historyApi.getHistory(userId = userId ?: "")
         call.enqueue(object : Callback<HistoryResponse> {
             override fun onResponse(

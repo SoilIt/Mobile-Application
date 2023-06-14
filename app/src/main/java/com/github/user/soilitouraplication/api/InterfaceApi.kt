@@ -1,4 +1,5 @@
 package com.github.user.soilitouraplication.api
+
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -20,13 +21,8 @@ interface FaqApi {
     fun getFaq(): Call<FaqResponse>
 }
 
-
 interface PostDetectionApi {
     @POST("/history")
     fun postHistory(@Body history: History): Call<HistoryResponse>
 }
-
-
-
-
 
