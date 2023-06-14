@@ -190,6 +190,8 @@ class HistoryFragment : Fragment() {
 
         itemTouchHelper = ItemTouchHelper(itemSwipeCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+    
+        fetchHistory()
 
         return view
     }
@@ -203,6 +205,7 @@ class HistoryFragment : Fragment() {
             try {
                 historyViewModel.fetchHistory()
                 historyViewModel.historyList.observe(viewLifecycleOwner) { historyList ->
+                    Log.d("TAG", "fetchHistory: $historyList")
                     this.historyList.clear()
                     this.historyList.addAll(historyList)
                     historyAdapter.notifyDataSetChanged()
