@@ -41,7 +41,7 @@ class HomeFragment : Fragment(), CampaignAdapter.OnItemClickListener  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         campaignAdapter = CampaignAdapter()
         campaignAdapter.setOnItemClickListener(this)
         viewModel.getCampaigns().observe(this) { campaigns ->
@@ -63,9 +63,7 @@ class HomeFragment : Fragment(), CampaignAdapter.OnItemClickListener  {
             startActivity(intent)
         }
 
-        binding.goToProfileFragment.setOnClickListener {
-//            TODO: Go to profile fragment
-        }
+
 
         binding.linearfaq.setOnClickListener {
             startActivity(Intent(requireContext(), FaqActivity::class.java))
@@ -125,8 +123,8 @@ class HomeFragment : Fragment(), CampaignAdapter.OnItemClickListener  {
             historyDao.getAllHistory().collectLatest { historyList ->
                 if (historyList.isNotEmpty()) {
                     val latestHistory = historyList[0]
-                    binding.valueTemperature.text = latestHistory.soil_temperature.toString()
-                    binding.valueMoisture.text = latestHistory.soil_moisture.toString()
+                    binding.valueTemperature.text = latestHistory.soil_temperature
+                    binding.valueMoisture.text = latestHistory.soil_moisture
                     binding.valueSoilcondition.text = latestHistory.soil_condition
                     binding.soiltype.text = latestHistory.soil_type
                     binding.datehistory.text = DateUtils.formatDateTime(latestHistory.created_at)
