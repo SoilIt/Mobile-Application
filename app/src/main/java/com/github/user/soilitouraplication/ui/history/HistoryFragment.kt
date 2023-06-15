@@ -2,6 +2,7 @@ package com.github.user.soilitouraplication.ui.history
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.*
 import android.os.Bundle
@@ -19,7 +20,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
-import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.database.HistoryDao
 import com.github.user.soilitouraplication.databinding.FragmentHistoryBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,10 +28,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 @Suppress("DEPRECATION")
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), HistoryAdapter.OnItemClickListener {
 
     private lateinit var historyViewModel: HistoryViewModel
-    private lateinit var historyApi: HistoryApi
     private lateinit var binding: FragmentHistoryBinding
     lateinit var historyAdapter: HistoryAdapter
 
@@ -67,7 +66,7 @@ class HistoryFragment : Fragment() {
         val recyclerView: RecyclerView = binding.history
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        historyAdapter = HistoryAdapter()
+        historyAdapter = HistoryAdapter(this)
         recyclerView.adapter = historyAdapter
 
         lifecycleScope.launch {
@@ -180,21 +179,15 @@ class HistoryFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 val deletedItem = historyAdapter.getData()[position]
-    
-                onShowBackDialog(deletedItem.id.toString())
 
-//                lifecycleScope.launch {
-//                    historyDao.deleteHistory(deletedItem)
-//                }
-//
-//                historyAdapter.removeAt(position)
-//                historyAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                onShowBackDialog(deletedItem.id)
+
             }
         }
 
         itemTouchHelper = ItemTouchHelper(itemSwipeCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-    
+
         fetchHistory()
 
         return view
@@ -211,7 +204,7 @@ class HistoryFragment : Fragment() {
                 historyViewModel.historyList.observe(viewLifecycleOwner) { historyList ->
                     this.historyList.clear()
                     this.historyList.addAll(historyList)
-    
+
                     Log.d("WHYYYYY", "fetchHistory: $historyList")
                     historyAdapter.notifyDataSetChanged()
 
@@ -220,7 +213,7 @@ class HistoryFragment : Fragment() {
                         historyList.forEach { history ->
                             historyDao.insertHistory(history)
                         }
-    
+
                         this@HistoryFragment.historyList.clear()
                         this@HistoryFragment.historyList.addAll(historyList)
                         historyAdapter.setData(historyList.toList())
@@ -236,12 +229,13 @@ class HistoryFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }
     }
-    
-    private fun onShowBackDialog(id:String) {
+
+    @SuppressLint("NotifyDataSetChanged")
+    private fun onShowBackDialog(id: String) {
         val alertDialogBuilder = AlertDialog.Builder(
             requireContext()
         )
-        
+
         alertDialogBuilder
             .setMessage(R.string.delete_history_desc)
             .setCancelable(true)
@@ -249,7 +243,7 @@ class HistoryFragment : Fragment() {
                 R.string.yes
             ) { _, _ ->
                 historyViewModel.deleteHistory(id)
-                
+
                 historyViewModel.isSuccessDelete.observe(viewLifecycleOwner) { isSuccess ->
                     if (isSuccess) {
                         Toast.makeText(
@@ -257,7 +251,7 @@ class HistoryFragment : Fragment() {
                             R.string.delete_history_success,
                             Toast.LENGTH_SHORT
                         ).show()
-                        
+
                         fetchHistory()
                     } else {
                         Toast.makeText(
@@ -265,7 +259,7 @@ class HistoryFragment : Fragment() {
                             R.string.delete_history_failed,
                             Toast.LENGTH_SHORT
                         ).show()
-                        
+
                         fetchHistory()
                     }
                 }
@@ -274,11 +268,27 @@ class HistoryFragment : Fragment() {
                 R.string.no
             ) { dialog, _ ->
                 dialog.cancel()
+                historyAdapter.notifyDataSetChanged()
             }
-        
+
         val alertDialog = alertDialogBuilder.create()
-        
+
         alertDialog.show()
     }
-}
 
+    private fun startDetailHistoryActivity(history: History) {
+        val intent = Intent(requireContext(), DetailHistory::class.java)
+
+        // Mengambil data history berdasarkan posisi
+        val position = historyList.indexOf(history)
+        val selectedHistory = historyList[position]
+
+        // Mengirim data history melalui Intent
+        intent.putExtra("history", selectedHistory)
+        startActivity(intent)
+    }
+
+    override fun onItemClick(history: History) {
+        startDetailHistoryActivity(history)
+    }
+}

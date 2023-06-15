@@ -8,7 +8,7 @@ import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.databinding.HistoryItemBinding
 import com.github.user.soilitouraplication.utils.DateUtils
 
-class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+class HistoryAdapter(private val listener: OnItemClickListener) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     private var historyList: MutableList<History> = mutableListOf()
 
@@ -44,6 +44,16 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
     inner class ViewHolder(private val binding: HistoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+            binding.root.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val history = historyList[position]
+                    listener.onItemClick(history)
+                }
+            }
+        }
+
         fun bind(historyItem: History) {
             binding.apply {
                 tvSoil.text = historyItem.soil_type
@@ -53,5 +63,9 @@ class HistoryAdapter : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
                 valueSoilcondition.text = historyItem.soil_condition
             }
         }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(history: History)
     }
 }

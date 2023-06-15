@@ -46,8 +46,8 @@
         val unit: String,
     )
 
-
     @Entity(tableName = "history")
+    @kotlinx.parcelize.Parcelize
     data class History(
         @PrimaryKey val id: String,
         val image: String,
@@ -57,5 +57,5 @@
         val soil_temperature: String,
         val soil_condition: String,
         val created_at: String,
-    )
+    ) : Parcelable
 
