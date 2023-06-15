@@ -1,13 +1,21 @@
 package com.github.user.soilitouraplication.ui.history
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Paint
+import android.graphics.pdf.PdfDocument
 import android.os.Bundle
-import androidx.core.content.ContentProviderCompat.requireContext
+import android.os.Environment
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.databinding.ActivityDetailHistoryBinding
 import com.github.user.soilitouraplication.utils.DateUtils
+import com.github.user.soilitouraplication.utils.SoilUtils
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
 
 @Suppress("DEPRECATION")
 class DetailHistory : AppCompatActivity() {
@@ -30,8 +38,15 @@ class DetailHistory : AppCompatActivity() {
             binding.temperature.text = it.soil_temperature
             binding.moisture.text = it.soil_moisture
             binding.soilCondition.text = it.soil_condition
-//            binding.soilDetail.text = it.soil_detail
-//            binding.plantRecommendation.text = it.plant_recommendation
+
+            val soilText = it.soil_type
+            val (soilDetail, plantRecommendation) = SoilUtils.getSoilDetailAndRecommendation(
+                soilText
+            )
+
+            binding.soilDetail.text = soilDetail?.description ?: ""
+            binding.plantRecommendation.text = plantRecommendation?.plants?.joinToString(", ") ?: ""
         }
     }
+
 }
