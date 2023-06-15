@@ -279,14 +279,19 @@ class HistoryFragment : Fragment(), HistoryAdapter.OnItemClickListener {
     private fun startDetailHistoryActivity(history: History) {
         val intent = Intent(requireContext(), DetailHistory::class.java)
 
-        // Mengambil data history berdasarkan posisi
-        val position = historyList.indexOf(history)
-        val selectedHistory = historyList[position]
+        lifecycleScope.launch {
+            val selectedHistory = historyDao.getHistoryById(history.id)
 
-        // Mengirim data history melalui Intent
-        intent.putExtra("history", selectedHistory)
-        startActivity(intent)
+            selectedHistory?.let {
+                Log.d("DetailHistory", "Selected History: $selectedHistory")
+
+                intent.putExtra("history", selectedHistory)
+                startActivity(intent)
+            }
+        }
     }
+
+
 
     override fun onItemClick(history: History) {
         startDetailHistoryActivity(history)

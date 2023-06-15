@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
 import com.github.user.soilitouraplication.databinding.ActivityDetailHistoryBinding
+import com.github.user.soilitouraplication.utils.DateUtils
 
 @Suppress("DEPRECATION")
 class DetailHistory : AppCompatActivity() {
@@ -25,7 +26,7 @@ class DetailHistory : AppCompatActivity() {
                 .load(it.image)
                 .into(binding.ivresultsoil)
             binding.soilType.text = it.soil_type
-            binding.date.text = it.created_at
+            binding.date.text = DateUtils.formatDateTime(it.created_at)
             binding.temperature.text = it.soil_temperature
             binding.moisture.text = it.soil_moisture
             binding.soilCondition.text = it.soil_condition

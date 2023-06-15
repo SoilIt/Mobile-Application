@@ -189,12 +189,11 @@ class DetailDetectionActivity : AppCompatActivity() {
         val user = Firebase.auth.currentUser
         val userId = user?.uid
 
-
         val byteArray = intent.getByteArrayExtra("image")
         val soilType = intent.getStringExtra("tvTextResults")
         val temperature = binding.temperature.text.toString()
         val moisture = binding.moisture.text.toString()
-        val soilcondition = binding.soilCondition.text.toString()
+        val soilCondition = binding.soilCondition.text.toString()
 
         if (byteArray != null) {
             val file = File.createTempFile("temp_image", ".jpg")
@@ -203,16 +202,14 @@ class DetailDetectionActivity : AppCompatActivity() {
             fileOutputStream.close()
 
             val fileReqBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-            val filePart = MultipartBody.Part.createFormData("file", "image.jpg", fileReqBody)
+            val uniqueFileName = "image_${System.currentTimeMillis()}.jpg"
+            val filePart = MultipartBody.Part.createFormData("file", uniqueFileName, fileReqBody)
 
             val userIdBody = (userId ?: "").toRequestBody("text/plain".toMediaTypeOrNull())
-            val soilTypeBody = soilType!!.toRequestBody("text/plain".toMediaTypeOrNull())
-            val soilMoistureBody =
-                moisture.toRequestBody("text/plain".toMediaTypeOrNull())
-            val soilTemperatureBody =
-                temperature.toRequestBody("text/plain".toMediaTypeOrNull())
-            val soilConditionBody =
-                soilcondition.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilTypeBody = soilType?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilMoistureBody = moisture.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilTemperatureBody = temperature.toRequestBody("text/plain".toMediaTypeOrNull())
+            val soilConditionBody = soilCondition.toRequestBody("text/plain".toMediaTypeOrNull())
 
             val retrofit = Retrofit.Builder()
                 .baseUrl("https://soilit-api-iwwdg24ftq-et.a.run.app/")
@@ -221,42 +218,46 @@ class DetailDetectionActivity : AppCompatActivity() {
 
             val service = retrofit.create(PostDetectionApi::class.java)
 
-            val call = service.postHistory(
-                filePart,
-                userIdBody,
-                soilTypeBody,
-                soilMoistureBody,
-                soilTemperatureBody,
-                soilConditionBody
-            )
+            val call = soilTypeBody?.let {
+                service.postHistory(
+                    filePart,
+                    userIdBody,
+                    it,
+                    soilMoistureBody,
+                    soilTemperatureBody,
+                    soilConditionBody
+                )
+            }
 
-            call.enqueue(object : Callback<HistoryPostResponse> {
-                override fun onResponse(
-                    call: Call<HistoryPostResponse>,
-                    response: Response<HistoryPostResponse>,
-                ) {
-                    if (response.isSuccessful) {
-                        val historyPostResponse = response.body()
-                        val message = historyPostResponse?.message
-                        Log.i("Retrofit", "Data uploaded successfully! Message: $message")
-                        showToast("Data uploaded successfully !")
-                        navigateToMainActivity()
-                    } else {
-                        val message = response.message()
-                        Log.e("Retrofit", "Data upload failed! Message: $message")
-                        showToast("Data upload failed !")
+            if (call != null) {
+                call.enqueue(object : Callback<HistoryPostResponse> {
+                    override fun onResponse(
+                        call: Call<HistoryPostResponse>,
+                        response: Response<HistoryPostResponse>
+                    ) {
+                        if (response.isSuccessful) {
+                            val historyPostResponse = response.body()
+                            val message = historyPostResponse?.message
+                            Log.i("Retrofit", "Data uploaded successfully! Message: $message")
+                            showToast("Data uploaded successfully!")
+                            navigateToMainActivity()
+                        } else {
+                            val message = response.message()
+                            Log.e("Retrofit", "Data upload failed! Message: $message")
+                            showToast("Data upload failed!")
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<HistoryPostResponse>, t: Throwable) {
-                    val message = t.localizedMessage
-                    Log.e("Retrofit", "Error: $message")
-                    showToast("Error: $message")
-
-                }
-            })
+                    override fun onFailure(call: Call<HistoryPostResponse>, t: Throwable) {
+                        val message = t.localizedMessage
+                        Log.e("Retrofit", "Error: $message")
+                        showToast("Error: $message")
+                    }
+                })
+            }
         }
     }
+
 
 
     private fun showToast(message: String) {
