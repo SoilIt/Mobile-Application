@@ -1,23 +1,59 @@
-<h1 align="center">Hi 👋, We are SoilIt!</h1>
-<h3 align="center">Soilit is an Android application that utilizes machine learning and cloud computing to detect soil color and determine soil quality. The application aims to provide an easy and affordable way for farmers, gardeners, or the general public to assess soil quality without the need for expensive equipment or laboratory analysis. The application will use image processing techniques to extract color features from soil images taken by the smartphone camera, and then use machine learning algorithms to classify the soil based on its fertility.</h3>
+# Soilit: Soil Detection using Machine Learning and Cloud Computing Android Application
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=soilit&label=Profile%20views&color=0e75b6&style=flat" alt="soilit" /> </p>
+![Soilit Logo](app/src/main/res/drawable/logo.png)
 
-- 🌐 You can visit our [website](https://soilit.web.app/)
+Welcome to the Soilit Android application! This project utilizes machine learning and cloud computing to detect soil properties and provide analysis on Android devices.
 
-- 🔭 We are part of [Bangkit Academy 2023](https://bangkit.academy/)
+## Overview
 
-- Aisy Al Fawwaz [https://www.linkedin.com/in/aisy-al-fawwaz-14937723a/](https://www.linkedin.com/in/aisy-al-fawwaz-14937723a/)
+Soilit is an Android application designed to help users analyze soil properties using machine learning algorithms and cloud computing. The application allows users to capture soil images using their smartphone's camera and provides instant analysis and insights about the soil composition, fertility, moisture content, and more.
 
-- Hany Yesica Sihombing [https://www.linkedin.com/in/hanyyesica/](https://www.linkedin.com/in/hanyyesica/)
+## Features
 
-- Viony Elizabeth [https://www.linkedin.com/in/viony-elizabeth-3a7791199/](https://www.linkedin.com/in/viony-elizabeth-3a7791199/)
+- Soil image capture using the smartphone's camera.
+- Machine learning algorithms for soil analysis.
+- Cloud computing for data processing and analysis.
+- Real-time soil property results and recommendations.
+- User-friendly interface and intuitive design.
 
-- Rama Dwiyantara Perkasa [https://www.linkedin.com/in/ramadwiyantara/](https://www.linkedin.com/in/ramadwiyantara/)
+## Screenshots
 
-- Adiva Veronia [https://www.linkedin.com/in/adiva-veronia-74523720a/](https://www.linkedin.com/in/adiva-veronia-74523720a/)
+![Screenshot 1](screenshots/screenshot1.jpg)
+![Screenshot 2](screenshots/screenshot2.jpg)
+![Screenshot 3](screenshots/screenshot3.jpg)
 
-- Naily Syarifah [https://www.linkedin.com/in/naily-syarifah-121ba6206/](https://www.linkedin.com/in/naily-syarifah-121ba6206/)
+## Installation
 
-<h3 align="left">Languages and Tools:</h3>
-<p align="left"> <a href="https://kotlinlang.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/kotlinlang/kotlinlang-icon.svg" alt="kotlin" width="40" height="40"/> </a> <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="40" height="40"/> </a> <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> </a> <a href="https://postman.com" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/getpostman/getpostman-icon.svg" alt="postman" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/> </a> </p>
+1. Clone the repository: `git clone https://github.com/SoilIt/Mobile-Application`
+2. Open the project in Android Studio.
+3. Build and run the application on an Android device or emulator.
+
+## Usage
+
+1. Launch the Soilit application on your Android device.
+2. Capture a soil image using the in-app camera feature.
+3. Wait for the machine learning and cloud computing algorithms to process the image.
+4. View the results, including soil composition, fertility, and moisture content.
+5. Explore additional features and recommendations provided by the application.
+
+## Technologies Used
+
+- Android Studio: The official IDE for Android application development.
+- Kotlin: The programming language used for developing the application.
+- Machine Learning Libraries: TensorFlow, scikit-learn, or any other libraries used for training and deploying the soil analysis models.
+- Cloud Computing: Google Cloud Platform (GCP), or any other cloud services used for data processing and analysis.
+
+## Contributing
+
+We welcome contributions to the Soilit project! If you would like to contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature`.
+3. Make your changes and commit them: `git commit -m 'Add your feature'`.
+4. Push to the branch: `git push origin feature/your-feature`.
+5. Open a pull request with a detailed description of the changes.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
