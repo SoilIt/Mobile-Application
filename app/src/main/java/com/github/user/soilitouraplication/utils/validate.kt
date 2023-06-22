@@ -2,8 +2,8 @@ package com.github.user.soilitouraplication.utils
 
 object Validate {
     fun validateEmail(email: CharSequence?): String? {
-        val emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
-        
+        val emailPattern = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*"
+
         return if (email != null) {
             if (email.isEmpty()) {
                 "Email tidak boleh kosong"
@@ -16,7 +16,7 @@ object Validate {
             null
         }
     }
-    
+
     fun validatePassword(password: CharSequence?): String? {
         return if (password != null) {
             if (password.isEmpty()) {

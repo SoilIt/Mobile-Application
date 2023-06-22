@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
-import com.github.user.soilitouraplication.MainActivity
+import com.github.user.soilitouraplication.ui.MainActivity
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.databinding.ActivityLoginBinding
 import com.github.user.soilitouraplication.ui.signup.RegisterActivity
@@ -175,6 +175,10 @@ class LoginActivity : AppCompatActivity() {
             val account: GoogleSignInAccount? = task.result
             if (account != null) {
                 updateUI(account)
+            } else {
+                // Tampilkan pesan bahwa akun Google tidak berhasil dipilih
+                Toast.makeText(this, "Failed to select Google account", Toast.LENGTH_SHORT).show()
+                onLoading(false)
             }
         } else {
             onLoading(false)
@@ -183,23 +187,30 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateUI(account: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+    private fun updateUI(account: GoogleSignInAccount?) {
+        // Jika ada akun Google yang berhasil dipilih
+        if (account != null) {
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
 
-        auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful) {
-                val user = auth.currentUser
+            auth.signInWithCredential(credential).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
 
-                user?.let { user ->
-                    saveUsernameToFirestore(user.uid, user.displayName ?: "", user.email)
+                    user?.let { user ->
+                        saveUsernameToFirestore(user.uid, user.displayName ?: "", user.email)
+                    }
+
+                    startMainActivity()
+                } else {
+                    Log.d("TAG", "GOOGLE : NOK ")
+                    Toast.makeText(this, "Failed to sign in with Google", Toast.LENGTH_SHORT).show()
                 }
 
-                startMainActivity()
-            } else {
-                Log.d("TAG", "GOOGLE : NOK ")
-                Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
+                onLoading(false)
             }
+        } else {
 
+            Toast.makeText(this, "Failed to select Google account", Toast.LENGTH_SHORT).show()
             onLoading(false)
         }
     }

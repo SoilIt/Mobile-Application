@@ -8,6 +8,7 @@ import com.bumptech.glide.Glide
 import com.github.user.soilitouraplication.databinding.ActivityDetailCampaignBinding
 import com.github.user.soilitouraplication.utils.DateUtils
 
+@Suppress("DEPRECATION")
 class DetailCampaign : AppCompatActivity() {
     private lateinit var binding: ActivityDetailCampaignBinding
 
@@ -34,6 +35,10 @@ class DetailCampaign : AppCompatActivity() {
         binding.tvtitle.text = campaignTitle
         binding.tvcampaigndescription.text = campaignDescription
         binding.tvcampaigndate.text = DateUtils.formatDateTimeCampaign(campaignDate.toString())
+        
+        binding.textView.setOnClickListener {
+            onBackPressed()
+        }
     }
 
     companion object {

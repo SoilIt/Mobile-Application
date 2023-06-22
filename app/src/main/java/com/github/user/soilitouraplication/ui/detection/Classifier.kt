@@ -49,9 +49,9 @@ class Classifier(
         }
     }
 
-    constructor(parcel: Parcel) : this(null,
-        parcel.readInt(),
-        parcel.createStringArrayList() ?: emptyList())
+    constructor(parcel: Parcel) : this(
+        null, parcel.readInt(), parcel.createStringArrayList() ?: emptyList()
+    )
 
     override fun recognizeImage(bitmap: Bitmap): SoilClassifier.Recognition {
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, inputSize, inputSize, false)
@@ -64,13 +64,9 @@ class Classifier(
 
         // Pre-process the input image
         val intValues = IntArray(inputSize * inputSize)
-        resizedBitmap.getPixels(intValues,
-            0,
-            resizedBitmap.width,
-            0,
-            0,
-            resizedBitmap.width,
-            resizedBitmap.height)
+        resizedBitmap.getPixels(
+            intValues, 0, resizedBitmap.width, 0, 0, resizedBitmap.width, resizedBitmap.height
+        )
         var pixel = 0
         for (i in 0 until inputSize) {
             for (j in 0 until inputSize) {
@@ -132,9 +128,11 @@ class Classifier(
         val maxConfidenceIndex = labelProbArray[0].indices.maxByOrNull { labelProbArray[0][it] }
         val maxConfidence = labelProbArray[0][maxConfidenceIndex!!]
 
-        val recognition = SoilClassifier.Recognition("" + maxConfidenceIndex,
+        val recognition = SoilClassifier.Recognition(
+            "" + maxConfidenceIndex,
             if (labelList.size > maxConfidenceIndex) labelList[maxConfidenceIndex] else "Unknown",
-            maxConfidence)
+            maxConfidence
+        )
 
         return recognition.copy(title = recognition.title, confidence = recognition.confidence)
     }

@@ -1,6 +1,8 @@
 package com.github.user.soilitouraplication.ui.history
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.*
 import android.os.Bundle
@@ -8,7 +10,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,25 +20,27 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.github.user.soilitouraplication.R
 import com.github.user.soilitouraplication.api.History
-import com.github.user.soilitouraplication.api.HistoryApi
 import com.github.user.soilitouraplication.database.HistoryDao
-import com.github.user.soilitouraplication.database.HistoryDatabase
 import com.github.user.soilitouraplication.databinding.FragmentHistoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 @Suppress("DEPRECATION")
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(), HistoryAdapter.OnItemClickListener {
 
     private lateinit var historyViewModel: HistoryViewModel
-    private lateinit var historyApi: HistoryApi
     private lateinit var binding: FragmentHistoryBinding
     lateinit var historyAdapter: HistoryAdapter
 
     private lateinit var itemTouchHelper: ItemTouchHelper
     val historyList: MutableList<History> = mutableListOf()
 
+
     // Dependency Injection
-    internal lateinit var historyDao: HistoryDao
+    @Inject
+    lateinit var historyDao: HistoryDao
 
     private lateinit var swipeRefreshLayout: SwipeRefreshLayout
     private var isRefreshing = false
@@ -45,6 +51,8 @@ class HistoryFragment : Fragment() {
     ): View {
         binding = FragmentHistoryBinding.inflate(inflater, container, false)
         val view = binding.root
+
+        historyViewModel = ViewModelProvider(this).get(HistoryViewModel::class.java)
 
         swipeRefreshLayout = binding.swipeRefreshLayout
         swipeRefreshLayout.setOnRefreshListener {
@@ -58,11 +66,8 @@ class HistoryFragment : Fragment() {
         val recyclerView: RecyclerView = binding.history
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        historyAdapter = HistoryAdapter()
+        historyAdapter = HistoryAdapter(this)
         recyclerView.adapter = historyAdapter
-
-        val historyDatabase = HistoryDatabase.getInstance(requireContext())
-        historyDao = historyDatabase.historyDao()
 
         lifecycleScope.launch {
             historyDao.getAllHistory().collect { historyList ->
@@ -175,17 +180,15 @@ class HistoryFragment : Fragment() {
                 val position = viewHolder.adapterPosition
                 val deletedItem = historyAdapter.getData()[position]
 
-                lifecycleScope.launch {
-                    historyDao.deleteHistory(deletedItem)
-                }
+                onShowBackDialog(deletedItem.id)
 
-                historyAdapter.removeAt(position)
-                historyAdapter.notifyItemRemoved(viewHolder.adapterPosition)
             }
         }
 
         itemTouchHelper = ItemTouchHelper(itemSwipeCallback)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
+        fetchHistory()
 
         return view
     }
@@ -197,11 +200,12 @@ class HistoryFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = true
 
             try {
-
                 historyViewModel.fetchHistory()
                 historyViewModel.historyList.observe(viewLifecycleOwner) { historyList ->
                     this.historyList.clear()
                     this.historyList.addAll(historyList)
+
+                    Log.d("WHYYYYY", "fetchHistory: $historyList")
                     historyAdapter.notifyDataSetChanged()
 
                     lifecycleScope.launch {
@@ -209,6 +213,10 @@ class HistoryFragment : Fragment() {
                         historyList.forEach { history ->
                             historyDao.insertHistory(history)
                         }
+
+                        this@HistoryFragment.historyList.clear()
+                        this@HistoryFragment.historyList.addAll(historyList)
+                        historyAdapter.setData(historyList.toList())
                     }
                 }
             } catch (e: Exception) {
@@ -221,5 +229,71 @@ class HistoryFragment : Fragment() {
             swipeRefreshLayout.isRefreshing = false
         }
     }
-}
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun onShowBackDialog(id: String) {
+        val alertDialogBuilder = AlertDialog.Builder(
+            requireContext()
+        )
+
+        alertDialogBuilder
+            .setMessage(R.string.delete_history_desc)
+            .setCancelable(true)
+            .setPositiveButton(
+                R.string.yes
+            ) { _, _ ->
+                historyViewModel.deleteHistory(id)
+
+                historyViewModel.isSuccessDelete.observe(viewLifecycleOwner) { isSuccess ->
+                    if (isSuccess) {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.delete_history_success,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        fetchHistory()
+                    } else {
+                        Toast.makeText(
+                            requireContext(),
+                            R.string.delete_history_failed,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
+                        fetchHistory()
+                    }
+                }
+            }
+            .setNegativeButton(
+                R.string.no
+            ) { dialog, _ ->
+                dialog.cancel()
+                historyAdapter.notifyDataSetChanged()
+            }
+
+        val alertDialog = alertDialogBuilder.create()
+
+        alertDialog.show()
+    }
+
+    private fun startDetailHistoryActivity(history: History) {
+        val intent = Intent(requireContext(), DetailHistory::class.java)
+
+        lifecycleScope.launch {
+            val selectedHistory = historyDao.getHistoryById(history.id)
+
+            selectedHistory?.let {
+                Log.d("DetailHistory", "Selected History: $selectedHistory")
+
+                intent.putExtra("history", selectedHistory)
+                startActivity(intent)
+            }
+        }
+    }
+
+
+
+    override fun onItemClick(history: History) {
+        startDetailHistoryActivity(history)
+    }
+}

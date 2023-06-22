@@ -1,11 +1,14 @@
 package com.github.user.soilitouraplication.ui.home
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -20,19 +23,25 @@ import com.github.user.soilitouraplication.utils.DateUtils
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @Suppress("DEPRECATION")
-class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAdapter.OnItemClickListener {
+@AndroidEntryPoint
+class HomeFragment : Fragment(), CampaignAdapter.OnItemClickListener  {
     private lateinit var campaignAdapter: CampaignAdapter
     private lateinit var viewModel: HomeViewModel
     private lateinit var binding: FragmentHomeBinding
     private var recyclerViewState: Parcelable? = null
 
+    @Inject
+    lateinit var historyDao: HistoryDao
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         campaignAdapter = CampaignAdapter()
         campaignAdapter.setOnItemClickListener(this)
         viewModel.getCampaigns().observe(this) { campaigns ->
@@ -53,25 +62,24 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
             val intent = Intent(requireContext(), FullCampaign::class.java)
             startActivity(intent)
         }
-        
-        binding.goToProfileFragment.setOnClickListener {
-//            TODO: Go to profile fragment
-        }
-        
+
+
+
         binding.linearfaq.setOnClickListener {
             startActivity(Intent(requireContext(), FaqActivity::class.java))
         }
-        
+
         setUser()
-        
+
         return binding.root
     }
-    
+
+    @SuppressLint("SetTextI18n")
     private fun setUser() {
         val db = Firebase.firestore
         val user = Firebase.auth.currentUser
         val usedId = user?.uid
-        
+
         db.collection("users").whereEqualTo("uid", usedId)
             .get()
             .addOnSuccessListener { documents ->
@@ -79,10 +87,12 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
                     val username = document.getString("name")
                     val firstWord = username?.split(" ")?.get(0)
                     binding.hiUser.text = "Hi, $firstWord"
+
                 }
             }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.fetchCampaigns()
@@ -113,8 +123,8 @@ class HomeFragment(private val historyDao: HistoryDao) : Fragment(), CampaignAda
             historyDao.getAllHistory().collectLatest { historyList ->
                 if (historyList.isNotEmpty()) {
                     val latestHistory = historyList[0]
-                    binding.valueTemperature.text = latestHistory.soil_temperature.toString()
-                    binding.valueMoisture.text = latestHistory.soil_moisture.toString()
+                    binding.valueTemperature.text = latestHistory.soil_temperature
+                    binding.valueMoisture.text = latestHistory.soil_moisture
                     binding.valueSoilcondition.text = latestHistory.soil_condition
                     binding.soiltype.text = latestHistory.soil_type
                     binding.datehistory.text = DateUtils.formatDateTime(latestHistory.created_at)
